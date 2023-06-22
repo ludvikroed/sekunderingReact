@@ -13,7 +13,6 @@ const Info = () => {
       <p>
         Hvis du har noen problemer eller noen tilbakemeldinger. send melding på
         Messenger til Ludvik Blichfeldt Rød eller email til lbroed@gmail.com
-        update
       </p>
     </div>
   );
