@@ -1,0 +1,22 @@
+.button-passeringer {
+    background-color: blue;
+    border: none;
+    color: white;
+    width: 150px;
+    height: 30px;
+    margin-top: 3px;
+    font-size: 20px;
+    border-radius: 2px;
+}
+
+.button-navn {
+    background-color: blue;
+    color: white;
+    border: none;
+    height: 30px;
+    margin: 2px;
+}
+
+.button-navn:hover, .button-passeringer:hover {
+    background-color: #1a237e;
+}

@@ -1,0 +1,140 @@
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.hele {
+  padding: 3px;
+    user-select: none;
+}
+
+.button-sekundering {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #3f51b5;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 100px;
+}
+
+.button-sekundering:hover {
+  background-color: #1a237e;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.bottom-section {
+  position: sticky;
+  bottom: 0;
+  overflow: auto;
+  background-color: black;
+  padding-top: 1px;
+  padding-bottom: 0px;
+  max-height: 20%;
+  border: 5px;
+  border-color: green;
+}
+
+.close-button-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+}
+
+.close-button {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.close-button::before,
+.close-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 2px;
+  background-color: black;
+  transform: translate(-50%, -50%);
+}
+
+.close-button::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close-button::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.resizer-t {
+  background-color: white;
+  cursor: row-resize;
+  height: 10px;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.content {
+  overflow: hidden;
+}
+
+.resizer-t {
+  width: 100%;
+  height: 20px; /* Increase the height as desired */
+  cursor: ns-resize;
+  background-color: #f2f2f2;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  position: sticky;
+  top: 0;
+}
+
+.top-section {
+  flex-grow: 1;
+  overflow: auto; /* Enable scrolling in the top section */
+  max-height: calc(100% - 20px); /* Subtract the height of the resizer from the available space */
+}
+
+
+.resizable-div {
+    height: 20px;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    cursor: grab;
+    z-index: 10;
+}
+
+.content-in-bottom-div {
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: auto;
+}
+
+.constent-in-top-div {
+    background-color: black;
+    overflow: auto;
+}
+
+.hele {
+    overflow: hidden;
+}

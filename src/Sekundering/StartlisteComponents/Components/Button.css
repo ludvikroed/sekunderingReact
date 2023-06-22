@@ -1,0 +1,16 @@
+.fixed-button {
+    position: fixed;
+    height: 60px;
+    bottom: 40px;
+    right: 20px;
+    width: 180px;
+    color: black;
+    padding: 10px;
+    border: none;
+    font-size: large;
+    background-color: lightgray;
+    border-radius: 2px;
+}
+
+
+

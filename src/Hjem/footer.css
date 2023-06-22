@@ -1,0 +1,22 @@
+
+
+footer {
+    background-color: #222;
+    left: 0;
+    bottom: 0;
+    color: #fff;
+    padding: 50px;
+    padding-left: 0px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+}
+
+.footer {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer:hover {
+    text-decoration: underline;
+}

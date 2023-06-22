@@ -1,0 +1,18 @@
+.alle-søke-oppsjoner {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  display: block;
+  background-color: #7FACAF;
+  color: black;
+}
+
+.alle-renn-scroller {
+  display: block;
+  color: green;
+}
+
+.søk-renn{
+  margin-bottom: 10px;
+}

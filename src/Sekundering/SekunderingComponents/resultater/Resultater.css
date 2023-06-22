@@ -1,0 +1,42 @@
+.dark-theme {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.resultater-container {
+    margin-top: 20px;
+
+}
+
+.tabell{
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+th {
+    font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #282828;
+}
+
+tbody tr:hover {
+    background-color: #333333;
+}

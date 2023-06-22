@@ -1,0 +1,29 @@
+.render-renn {
+    margin-top: 10px;
+}
+
+.renn {
+    margin-bottom: 7px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+}
+
+.renn-i-dag {
+    background-color: #333;
+}
+
+.renn a {
+    text-decoration: none;
+    color: white;
+}
+
+.renn a:hover {
+    text-decoration: underline;
+}
+
+.renn h2 {
+    margin-top: 5px;
+}

@@ -1,0 +1,31 @@
+.klasser-container h2 {
+    margin-bottom: 10px;
+}
+
+.klasser-container select {
+    padding: 8px 32px 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    appearance: none;
+    width: 200px;
+    outline: none;
+}
+
+.klasser-container select::-ms-expand {
+    display: none;
+}
+
+.klasser-container select::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 6px 0 6px;
+    border-color: #333 transparent transparent transparent;
+    pointer-events: none;
+}
