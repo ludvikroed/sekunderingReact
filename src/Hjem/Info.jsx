@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./footer.css"
+import "./footer.css";
 const Info = () => {
   return (
     <div>
@@ -12,7 +12,7 @@ const Info = () => {
       <p>Denne nettsiden er lagd av Ludvik Blichfeldt Rød</p>
       <p>
         Hvis du har noen problemer eller noen tilbakemeldinger. send melding på
-        Messenger til Ludvik Blichfeldt Rød
+        Messenger til Ludvik Blichfeldt Rød eller email til lbroed@gmail.com
       </p>
     </div>
   );
