@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import AlleRenn from "./Sekundering/AlleRennComponents/AlleRenn.jsx";
 import Startliste from "./Sekundering/StartlisteComponents/Startliste";
@@ -7,20 +8,22 @@ import Innstillinger from "./Sekundering/SekunderingComponents/innstillinger/inn
 import Tabs from "./Sekundering/SekunderingComponents/tabs/Tabs.jsx";
 import Resultater from "./Sekundering/SekunderingComponents/resultater/Resultater.jsx";
 import Info from "./Hjem/Info.jsx";
-import "./alle.css";
 import Hjem from "./Hjem/Hjem.jsx";
 import ManuellInnlegging from "./Sekundering/ManuellInnlegging/Manuellinnlegging.jsx";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AlleRitt from "./Sekundering/ritt/AlleRittComponents/AlleRitt.jsx";
+import StartlisteRitt from "./Sekundering/ritt/startlisteRitt/startlisteRitt.jsx";
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Hjem />} />
-        <Route path="info" element={<Info />} />
+        <Route path="/info" element={<Info />} />
         <Route path="/manuell" element={<ManuellInnlegging />} />
         <Route path="/renn" element={<AlleRenn />} />
         <Route path="/renn/startliste/:id" element={<Startliste />} />
+        <Route path="/ritt" element={<AlleRitt />} />
+        <Route path="/ritt/startliste/:rittId" element={<StartlisteRitt />} />
         <Route
           path="/sekundering"
           element={
@@ -52,4 +55,5 @@ const App = () => {
     </Router>
   );
 };
+
 export default App;

@@ -19,6 +19,7 @@ const AlleRenn = () => {
   const [isChecked, setIsChecked] = useState(true);
   const [isCheckedSøk, setIsCheckedSøk] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, serError] = useState(false);
 
   function handleChangeSøk() {
     setIsCheckedSøk(!isCheckedSøk);
@@ -39,8 +40,17 @@ const AlleRenn = () => {
       .catch((error) => {
         console.error(error);
         setIsLoading(false);
+        serError(true)
       });
   }, [lastNyeRenn]);
+  if (error) {
+    return (
+      <div>
+        <h1>Error</h1>
+        <p>feil med lasting av konkurannser</p>
+      </div>
+    );
+  }
 
   return (
     <>

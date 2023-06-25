@@ -95,6 +95,15 @@ function Startliste() {
     );
   }
 
+  if (data[0] === "error") {
+    return (
+      <div>
+        <h1>Error</h1>
+        <p>EQ timing sender ingen utdøvere til nettsiden. Gå på EQ timing å se om det er noen utdøvere der.</p>
+      </div>
+    );
+  }
+
   let klasser = data[1];
 
   const handleKlasseClick = (klasse) => {
