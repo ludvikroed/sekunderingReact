@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import AlleRenn from "./Sekundering/AlleRennComponents/AlleRenn.jsx";
@@ -12,10 +12,12 @@ import Hjem from "./Hjem/Hjem.jsx";
 import ManuellInnlegging from "./Sekundering/ManuellInnlegging/Manuellinnlegging.jsx";
 import AlleRitt from "./Sekundering/ritt/AlleRittComponents/AlleRitt.jsx";
 import StartlisteRitt from "./Sekundering/ritt/startlisteRitt/startlisteRitt.jsx";
+import Redirect from "./Redirect.jsx";
 
 const App = () => {
   return (
     <Router>
+      <Redirect />
       <Routes>
         <Route path="/" element={<Hjem />} />
         <Route path="/info" element={<Info />} />
@@ -27,10 +29,10 @@ const App = () => {
         <Route
           path="/sekundering"
           element={
-            <div>
+            <>
               <Tabs />
               <Sekundering />
-            </div>
+            </>
           }
         />
         <Route

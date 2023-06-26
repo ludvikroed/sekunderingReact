@@ -16,7 +16,11 @@ function VelgHvaSkalVisesPåKnapper() {
       >
         Velg hva som vises på knapper
       </button>
-      {showDropdown && <VisTing />}
+      {showDropdown && (
+        <div>
+          <VisTing /> Du må laste inn siden på nytt for at endringene skal vises
+        </div>
+      )}
       <hr />
     </div>
   );

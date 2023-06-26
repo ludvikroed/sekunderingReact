@@ -16,6 +16,8 @@ function Startliste() {
   const [checkedCheckboxes, setCheckedCheckboxes] = useState({});
   const [checkedLøpere, setCheckedLøpere] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
+  const [laster, setLaster] = useState(true)
+  const [error, setError] = useState(false)
   const [hvisStarttider, setHvisStarttider] = useState(() => {
     const starttiderJson = localStorage.getItem("visStarttiderStartliste");
     if (starttiderJson) {
@@ -79,15 +81,27 @@ function Startliste() {
   }, [hvisKlubb]);
 
   useEffect(() => {
-    const url = "https://appapi.sekundering.repl.co/lopere/?id=" + id;
+    const url = "https://appapi.sekundering.repl.co/renn/?rennNavn=" + id;
     async function fetchData() {
-      const result = await axios.get(url);
-      setData(result.data);
+      try {
+        const result = await axios.get(url);
+        setData(result.data);
+        setLaster(false)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLaster(false)
+        setError(true)
+      }
     }
     fetchData();
   }, [id]);
 
-  if (!data) {
+  if (error) {
+    return(
+      <div>Det ser ut til at noe er feil. Dette kan skje av flere grunner. Det mest sansynlige er at nettsiden ikke får tilgang til dataen fra EQtiming</div>
+    )
+  }
+  if (laster) {
     return (
       <>
         <Loading />

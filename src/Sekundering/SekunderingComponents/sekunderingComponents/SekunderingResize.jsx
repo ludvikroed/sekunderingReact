@@ -5,10 +5,8 @@ import VelgHvaSkalVisesPåKnapper from "./velgHvaSkalVisesPåKnapper";
 
 const SekunderingResize = ({ løpereData, setLøpereData }) => {
   const [visTider, setVisTider] = useState(true);
-
-  const [dragStartY, setDragStartY] = useState(window.innerHeight - 100);
   const [dragging, setDragging] = useState(false);
-  const [yPosition, setYPosition] = useState(window.innerHeight - 100);
+  const [yPosition, setYPosition] = useState(window.innerHeight - 400);
   const [selectedLøper, setSelectedLøper] = useState(null);
 
   // skru av så man ikke kan scrolle
@@ -20,7 +18,6 @@ const SekunderingResize = ({ løpereData, setLøpereData }) => {
   }, []);
 
   const handleMouseDown = (e) => {
-    setDragStartY(e.clientY);
     setDragging(true);
   };
 
@@ -32,13 +29,11 @@ const SekunderingResize = ({ løpereData, setLøpereData }) => {
     if (dragging) {
       const deltaY = e.clientY;
       setYPosition(deltaY);
-      setDragStartY(e.clientY);
     }
   };
 
   const handleTouchStart = (e) => {
     const touch = e.touches[0];
-    setDragStartY(touch.clientY);
     setDragging(true);
   };
 
@@ -47,7 +42,6 @@ const SekunderingResize = ({ løpereData, setLøpereData }) => {
       const touch = e.touches[0];
       const deltaY = touch.clientY;
       setYPosition(deltaY);
-      setDragStartY(touch.clientY);
     }
   };
 
@@ -71,15 +65,17 @@ const SekunderingResize = ({ løpereData, setLøpereData }) => {
         className="resizable-div"
         style={{
           top: `${yPosition}px`,
+          color: "black"
         }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
-      ></div>
+      >Dra meg</div>
       <div
         className="constent-in-top-div"
         style={{ height: `${yPosition - 55}px` }}
       >
+        
         <VelgHvaSkalVisesPåKnapper />
         <LøpereButtons
           løpereData={løpereData}
@@ -89,10 +85,11 @@ const SekunderingResize = ({ løpereData, setLøpereData }) => {
           setVisTider={setVisTider}
         />
       </div>
+      
       <div
         className="content-in-bottom-div"
         style={{
-          top: `${yPosition + 20}px`,
+          top: `${yPosition + 33}px`,
         }}
       >
         <RenderTider

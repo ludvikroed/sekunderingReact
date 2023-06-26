@@ -21,7 +21,7 @@ function AngreSekundering({
     <div>
       {(visTider && (
         <button className="button-sekundering" onClick={AngreSekunderingButton}>
-          Angre passeringen
+          Angre denne passeringen
         </button>
       )) || <p>Du fjerna passeringen.</p>}
     </div>

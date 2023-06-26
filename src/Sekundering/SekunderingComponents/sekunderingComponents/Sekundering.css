@@ -113,12 +113,14 @@
 
 
 .resizable-div {
-    height: 20px;
     width: 100%;
     background-color: white;
     position: absolute;
     cursor: grab;
     z-index: 10;
+    color: black;
+    text-align: center;
+    padding: 6px;
 }
 
 .content-in-bottom-div {
