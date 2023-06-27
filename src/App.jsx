@@ -19,6 +19,15 @@ const App = () => {
     <Router>
       <Redirect />
       <Routes>
+        <Route
+          path="*"
+          element={
+            <>
+              <h1>404 Not Found</h1>
+              <p>Siden du leter etter finnes ikke</p>
+            </>
+          }
+        />
         <Route path="/" element={<Hjem />} />
         <Route path="/info" element={<Info />} />
         <Route path="/manuell" element={<ManuellInnlegging />} />

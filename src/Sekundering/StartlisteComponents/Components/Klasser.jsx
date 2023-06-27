@@ -7,7 +7,14 @@ function Klasser({ klasser, handleKlasseClick, selectedKlasse }) {
     handleKlasseClick(selectedOption);
   };
 
-  const dropdownOptions = klasser.map((klasse, index) => (
+  const endraKlasse = klasser.map((klasse) => {
+    return klasse[0];
+  });
+  // Remove duplicate items from klasser array
+  const uniqueKlasser = [...new Set(endraKlasse)];
+  uniqueKlasser.unshift("Alle")
+
+  const dropdownOptions = uniqueKlasser.map((klasse, index) => (
     <option key={index} value={klasse}>
       {klasse}
     </option>

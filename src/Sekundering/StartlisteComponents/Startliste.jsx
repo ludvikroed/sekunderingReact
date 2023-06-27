@@ -1,4 +1,3 @@
-//Løpere.js
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -16,8 +15,8 @@ function Startliste() {
   const [checkedCheckboxes, setCheckedCheckboxes] = useState({});
   const [checkedLøpere, setCheckedLøpere] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
-  const [laster, setLaster] = useState(true)
-  const [error, setError] = useState(false)
+  const [laster, setLaster] = useState(true);
+  const [error, setError] = useState(false);
   const [hvisStarttider, setHvisStarttider] = useState(() => {
     const starttiderJson = localStorage.getItem("visStarttiderStartliste");
     if (starttiderJson) {
@@ -86,20 +85,23 @@ function Startliste() {
       try {
         const result = await axios.get(url);
         setData(result.data);
-        setLaster(false)
+        setLaster(false);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setLaster(false)
-        setError(true)
+        setLaster(false);
+        setError(true);
       }
     }
     fetchData();
   }, [id]);
 
   if (error) {
-    return(
-      <div>Det ser ut til at noe er feil. Dette kan skje av flere grunner. Det mest sansynlige er at nettsiden ikke får tilgang til dataen fra EQtiming</div>
-    )
+    return (
+      <div>
+        Det ser ut til at noe er feil. Dette kan skje av flere grunner. Det mest
+        sansynlige er at nettsiden ikke får tilgang til dataen fra EQtiming
+      </div>
+    );
   }
   if (laster) {
     return (
@@ -113,7 +115,10 @@ function Startliste() {
     return (
       <div>
         <h1>Error</h1>
-        <p>EQ timing sender ingen utdøvere til nettsiden. Gå på EQ timing å se om det er noen utdøvere der.</p>
+        <p>
+          EQ timing sender ingen utdøvere til nettsiden. Gå på EQ timing å se om
+          det er noen utdøvere der.
+        </p>
       </div>
     );
   }
@@ -162,9 +167,7 @@ function Startliste() {
         checkedCheckboxes={checkedCheckboxes}
         handleCheckboxChange={handleCheckboxChange}
       />
-
       <Søk searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-
       <LøpereListe
         hvisStarttider={hvisStarttider}
         hvisStartnummer={hvisStartnummer}
