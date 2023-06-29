@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import VisTing from "./components/VisTing";
+import React from "react";
 import FjernPasseringer from "./components/FjernPasseringer";
-import axios from "axios";
 
 const Innstillinger = () => {
   function resetData() {
@@ -12,8 +10,6 @@ const Innstillinger = () => {
 
   return (
     <div>
-      <hr />
-      <VisTing />
       <hr />
       <button
         className="button-sekundering"
@@ -32,3 +28,12 @@ const Innstillinger = () => {
 };
 
 export default Innstillinger;
+
+
+
+
+
+
+
+
+

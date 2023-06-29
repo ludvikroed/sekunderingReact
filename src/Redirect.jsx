@@ -2,11 +2,9 @@ import React, { useEffect } from "react";
 const Redirect = () => {
   useEffect(() => {
     const currentUrl = window.location.href;
-    const hasWww = currentUrl.includes("www.");
 
-    if (!hasWww) {
-      // Redirect to URL with 'www.'
-      if (!currentUrl.includes("localhost")) {
+    if (!currentUrl.includes("www.")) {
+      if (!currentUrl.includes("3000")) {
         const newUrl = currentUrl.replace("//", "//www.");
         window.location.href = newUrl;
       }

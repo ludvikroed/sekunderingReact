@@ -8,6 +8,8 @@ const SekunderingResize = ({ løpereData, setLøpereData }) => {
   const [dragging, setDragging] = useState(false);
   const [yPosition, setYPosition] = useState(window.innerHeight - 400);
   const [selectedLøper, setSelectedLøper] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+
 
   // skru av så man ikke kan scrolle
   useEffect(() => {
@@ -65,27 +67,33 @@ const SekunderingResize = ({ løpereData, setLøpereData }) => {
         className="resizable-div"
         style={{
           top: `${yPosition}px`,
-          color: "black"
+          color: "black",
         }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
-      >Dra meg</div>
+      >
+        Dra meg
+      </div>
       <div
         className="constent-in-top-div"
         style={{ height: `${yPosition - 55}px` }}
       >
-        
-        <VelgHvaSkalVisesPåKnapper />
+        <VelgHvaSkalVisesPåKnapper
+          showDropdown={showDropdown}
+          setShowDropdown={setShowDropdown}
+        />
         <LøpereButtons
           løpereData={løpereData}
           setLøpereData={setLøpereData}
           selectedLøper={selectedLøper}
           setSelectedLøper={setSelectedLøper}
           setVisTider={setVisTider}
+          showDropdown={showDropdown}
+          setShowDropdown={setShowDropdown}
         />
       </div>
-      
+
       <div
         className="content-in-bottom-div"
         style={{

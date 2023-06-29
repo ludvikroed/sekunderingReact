@@ -1,5 +1,4 @@
-import React, { useState} from "react";
-import { Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { LøperPasserer } from "./LøperPasserer";
 import "./Sekundering.css";
 
@@ -8,8 +7,35 @@ function LøpereButtons({
   setLøpereData,
   selectedLøper,
   setSelectedLøper,
+  showDropdown,
   setVisTider,
 }) {
+  useEffect(() => {
+    const storedVisAntallPasseringer = localStorage.getItem(
+      "visAntallPasseringer"
+    );
+    const parsedVisAntallPasseringer = storedVisAntallPasseringer
+      ? JSON.parse(storedVisAntallPasseringer)
+      : false;
+    setVisAntallPasseringer(parsedVisAntallPasseringer);
+
+    const storedVisKlasse = localStorage.getItem("visKlasse");
+    const parsedVisKlasse = storedVisKlasse
+      ? JSON.parse(storedVisKlasse)
+      : false;
+    setVisKlasse(parsedVisKlasse);
+
+    const storedVisKlubb = localStorage.getItem("visKlubb");
+    const parsedVisKlubb = storedVisKlubb ? JSON.parse(storedVisKlubb) : false;
+    setVisklubb(parsedVisKlubb);
+
+    const storedVisStartnummer = localStorage.getItem("visStartnummer");
+    const parsedVisStartnummer = storedVisStartnummer
+      ? JSON.parse(storedVisStartnummer)
+      : false;
+    setVisStartnummer(parsedVisStartnummer);
+  }, [showDropdown]);
+
   const [showComponent, setShowComponent] = useState(false);
 
   const [visKlubb, setVisklubb] = useState(() => {
@@ -39,7 +65,7 @@ function LøpereButtons({
   const handleButtonClick = (index) => {
     setSelectedLøper(index);
     setShowComponent(true);
-    setVisTider(true)
+    setVisTider(true);
   };
 
   return (
@@ -50,7 +76,7 @@ function LøpereButtons({
             className="button-sekundering"
             onClick={() => handleButtonClick(index)}
           >
-            {løper.navn}
+            {løper.navn}{" "}
             {visAntallPasseringer && (
               <>
                 <hr />
@@ -65,8 +91,7 @@ function LøpereButtons({
             )}
             {visKlasse && (
               <>
-                <hr />
-                {"Klasse: "} {løper.klasse}
+                <hr /> {"Klasse: "} {løper.klasse}
               </>
             )}
             {visKlubb && (
