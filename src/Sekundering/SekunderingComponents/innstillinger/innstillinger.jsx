@@ -1,5 +1,6 @@
 import React from "react";
 import FjernPasseringer from "./components/FjernPasseringer";
+import Tabs from "../../../Tabs";
 
 const Innstillinger = () => {
   function resetData() {
@@ -9,31 +10,33 @@ const Innstillinger = () => {
   }
 
   return (
-    <div>
-      <hr />
-      <button
-        className="button-sekundering"
-        onDoubleClick={resetData}
-        style={{ maxWidth: "500px" }}
-      >
-        <h2>Dobbel klikk her for å nullstille Sekundering.</h2>
-        <h2>Du vil miste alle passeringer og resultater</h2>
-        <h2 style={{ color: "red" }}>!Dette er ikke mulig å gjøre om på!</h2>
-      </button>
-      <hr />
-      <FjernPasseringer />
-      <hr />
-    </div>
+    <>
+      <header>
+        <Tabs />
+      </header>
+      <main>
+        <section>
+          <hr />
+          <button
+            className="button-sekundering"
+            onDoubleClick={resetData}
+            style={{ maxWidth: "500px" }}
+          >
+            <h2>Dobbel klikk her for å nullstille Sekundering.</h2>
+            <h2>Du vil miste alle passeringer og resultater</h2>
+            <h2 style={{ color: "red" }}>
+              !Dette er ikke mulig å gjøre om på!
+            </h2>
+          </button>
+        </section>
+        <section>
+          <hr />
+          <FjernPasseringer />
+          <hr />
+        </section>
+      </main>
+    </>
   );
 };
 
 export default Innstillinger;
-
-
-
-
-
-
-
-
-

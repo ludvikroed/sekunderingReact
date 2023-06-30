@@ -4,6 +4,7 @@ import SportSelecter from "./Components/SportSelecter";
 import RenderRenn from "./Components/renderRenn";
 import { CallApiAndSort } from "./Components/CallApiAndSort";
 import Loading from "./Components/Loading";
+import Helmet from "react-helmet";
 
 import Søk from "./Components/Søk";
 import "./spinner.css";
@@ -40,7 +41,7 @@ const AlleRenn = () => {
       .catch((error) => {
         console.error(error);
         setIsLoading(false);
-        serError(true)
+        serError(true);
       });
   }, [lastNyeRenn]);
   if (error) {
@@ -54,53 +55,65 @@ const AlleRenn = () => {
 
   return (
     <>
-      <div className="alle-søke-oppsjoner">
-        <SportSelecter sport={sport} setSport={setSport} />
-        <hr />
-        <div className="søke-knapper">
-          <label className="container-checkbox">
-            <input
-              className="my-checkbox"
-              type="checkbox"
-              checked={isCheckedSøk}
-              onChange={handleChangeSøk}
-            />
-            <span className="checkmark"></span>
-            Vis søkeopsjoner
-          </label>
-          <button className="last-nye-renn-button" onClick={lastNyeRennFunc}>
-            Last konkurannser
-          </button>
+      <Helmet>
+        <title>konkurranser EQtiming</title>
+        <meta name="description" content="konkurranser fra EQtiming" />
+        <meta
+          name="keywords"
+          content="Sekundering, Sekunderings App, Sekunderingsprogram, Sekundering med EQtiming, Manuell sekundering"
+        />
+        <link rel="canonical" href="https://www.sekundering.no/renn" />
+      </Helmet>
+      <header>
+        <div className="alle-søke-oppsjoner">
+          <SportSelecter sport={sport} setSport={setSport} />
+          <hr />
+          <div className="søke-knapper">
+            <label className="container-checkbox">
+              <input
+                className="my-checkbox"
+                type="checkbox"
+                checked={isCheckedSøk}
+                onChange={handleChangeSøk}
+              />
+              <span className="checkmark"></span>
+              Vis søkeopsjoner
+            </label>
+            <button className="last-nye-renn-button" onClick={lastNyeRennFunc}>
+              Last konkurannser
+            </button>
+          </div>
+          {isCheckedSøk && (
+            <div
+              className={`søke-klapper-wrap ${
+                isCheckedSøk ? "søke-klapper-wrap-wrap" : ""
+              }`}
+            >
+              <DateSelecter
+                setDag={setDag}
+                setIsChecked={setIsChecked}
+                isChecked={isChecked}
+                dag={dag}
+              />
+              <Søk setSøk={setSøk} />
+            </div>
+          )}
         </div>
-        {isCheckedSøk && (
-          <div
-            className={`søke-klapper-wrap ${
-              isCheckedSøk ? "søke-klapper-wrap-wrap" : ""
-            }`}
-          >
-            <DateSelecter
-              setDag={setDag}
-              setIsChecked={setIsChecked}
-              isChecked={isChecked}
+      </header>
+      <main>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className="alle-renn-scroller">
+            <RenderRenn
+              renn={renn}
               dag={dag}
+              isCheckedSøk={isCheckedSøk}
+              isChecked={isChecked}
             />
-            <Søk setSøk={setSøk} />
           </div>
         )}
-      </div>
-
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <div className="alle-renn-scroller">
-          <RenderRenn
-            renn={renn}
-            dag={dag}
-            isCheckedSøk={isCheckedSøk}
-            isChecked={isChecked}
-          />
-        </div>
-      )}
+      </main>
     </>
   );
 };

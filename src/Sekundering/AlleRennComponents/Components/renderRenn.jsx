@@ -44,7 +44,7 @@ function RenderRenn({ renn, dag, isCheckedSøk, isChecked }) {
             }}
           >
             {formattedStarttid}, {sted}
-            <h2>{navn}</h2>
+            <p className="navn-på-renn">{navn}</p>
           </a>
         </div>
       );

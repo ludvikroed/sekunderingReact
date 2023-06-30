@@ -24,7 +24,7 @@ const App = () => {
           element={
             <>
               <h1>404 Not Found</h1>
-              <p>Siden du leter etter finnes ikke</p>
+              <p>Siden du leter etter finnes ikke ellers har det skjedd en feil</p>
             </>
           }
         />
@@ -35,33 +35,9 @@ const App = () => {
         <Route path="/renn/startliste/:id" element={<Startliste />} />
         <Route path="/ritt" element={<AlleRitt />} />
         <Route path="/ritt/startliste/:rittId" element={<StartlisteRitt />} />
-        <Route
-          path="/sekundering"
-          element={
-            <>
-              <Tabs />
-              <Sekundering />
-            </>
-          }
-        />
-        <Route
-          path="/sekundering/resultater"
-          element={
-            <>
-              <Tabs />
-              <Resultater />
-            </>
-          }
-        />
-        <Route
-          path="/sekundering/innstillinger"
-          element={
-            <>
-              <Tabs />
-              <Innstillinger />
-            </>
-          }
-        />
+        <Route path="/sekundering" element={<Sekundering />} />
+        <Route path="/sekundering/resultater" element={<Resultater />} />
+        <Route path="/sekundering/innstillinger" element={<Innstillinger />} />
       </Routes>
     </Router>
   );

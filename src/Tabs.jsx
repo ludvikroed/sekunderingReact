@@ -7,11 +7,14 @@ const Tabs = () => {
   let navigate = useNavigate();
   const handleTabClick = (index) => {
     setActiveTab(index);
-    if (index === 1) {
-      navigate("/sekundering/info");
-    } else {
+    if (index === 0) {
       navigate("/sekundering/");
+    } else if (index === 1) {
+      navigate("/sekundering/resultater");
+    } else if (index === 2){
+      navigate("/sekundering/innstillinger");
     }
+    console.log(activeTab)
   };
 
   return (
@@ -26,7 +29,16 @@ const Tabs = () => {
         className={`tab ${activeTab === 1 ? "active" : ""}`}
         onClick={() => handleTabClick(1)}
       >
-        Info og resultater
+        Resultater
+      </div>
+      <div
+        className={`tab ${activeTab === 2 ? "active" : ""}`}
+        onClick={() => {
+          handleTabClick(2);
+          setActiveTab(2);
+        }}
+      >
+        Innstillinger
       </div>
     </div>
   );

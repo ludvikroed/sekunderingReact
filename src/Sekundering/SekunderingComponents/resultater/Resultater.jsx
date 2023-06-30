@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Resultater.css";
+import Tabs from "../../../Tabs";
 
 const Resultater = () => {
   const storedData = sessionStorage.getItem("løpereData");
@@ -65,79 +66,82 @@ const Resultater = () => {
   };
 
   return (
-    <div className="dark-theme">
-      <div className="checkbox-container">
-        <div className="checkbox-div">
-          <label className="container-checkbox">
-            Vis Klasse
-            <input
-              className="my-checkbox"
-              type="checkbox"
-              checked={showKlasse}
-              onChange={toggleKlasse}
-            />
-            <span className="checkmark"></span>
-          </label>
-        </div>
-        <div className="checkbox-div">
-          <label className="container-checkbox">
-            Vis Klubb
-            <input
-              className="my-checkbox"
-              type="checkbox"
-              checked={showKlubb}
-              onChange={toggleKlubb}
-            />
-            <span className="checkmark"></span>
-          </label>
-        </div>
-        <div className="checkbox-div">
-          <label className="container-checkbox">
-            Vis Startnummer
-            <input
-              className="my-checkbox"
-              type="checkbox"
-              checked={showStartnummer}
-              onChange={toggleStartnummer}
-            />
-            <span className="checkmark"></span>
-          </label>
-        </div>
-      </div>
-      <div className="resultater-container">
-        {ferdigLøpereArray.map((passering, index1) => (
-          <div key={index1}>
-            <h2>Passering {index1 + 1}</h2>
-            <div className="tabell">
-              <table>
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Navn</th>
-                    <th>Tid bak</th>
-                    {showStartnummer && <th>Startnummer</th>}
-                    {showKlubb && <th>Klubb</th>}
-                    {showKlasse && <th>Klasse</th>}
-                  </tr>
-                </thead>
-                <tbody>
-                  {passering.map((data, index2) => (
-                    <tr key={index2}>
-                      <td>{index2 + 1}</td>
-                      <td>{data[1].navn}</td>
-                      <td>{(data[0] - passering[0][0]).toFixed(1)}</td>
-                      {showStartnummer && <td>{data[1].startNummer}</td>}
-                      {showKlubb && <td>{data[1].klubb}</td>}
-                      {showKlasse && <td>{data[1].klasse}</td>}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+    <>
+    <Tabs/>
+      <div className="dark-theme">
+        <div className="checkbox-container">
+          <div className="checkbox-div">
+            <label className="container-checkbox">
+              Vis Klasse
+              <input
+                className="my-checkbox"
+                type="checkbox"
+                checked={showKlasse}
+                onChange={toggleKlasse}
+              />
+              <span className="checkmark"></span>
+            </label>
           </div>
-        ))}
+          <div className="checkbox-div">
+            <label className="container-checkbox">
+              Vis Klubb
+              <input
+                className="my-checkbox"
+                type="checkbox"
+                checked={showKlubb}
+                onChange={toggleKlubb}
+              />
+              <span className="checkmark"></span>
+            </label>
+          </div>
+          <div className="checkbox-div">
+            <label className="container-checkbox">
+              Vis Startnummer
+              <input
+                className="my-checkbox"
+                type="checkbox"
+                checked={showStartnummer}
+                onChange={toggleStartnummer}
+              />
+              <span className="checkmark"></span>
+            </label>
+          </div>
+        </div>
+        <div className="resultater-container">
+          {ferdigLøpereArray.map((passering, index1) => (
+            <div key={index1}>
+              <h2>Passering {index1 + 1}</h2>
+              <div className="tabell">
+                <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Navn</th>
+                      <th>Tid bak</th>
+                      {showStartnummer && <th>Startnummer</th>}
+                      {showKlubb && <th>Klubb</th>}
+                      {showKlasse && <th>Klasse</th>}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {passering.map((data, index2) => (
+                      <tr key={index2}>
+                        <td>{index2 + 1}</td>
+                        <td>{data[1].navn}</td>
+                        <td>{(data[0] - passering[0][0]).toFixed(1)}</td>
+                        {showStartnummer && <td>{data[1].startNummer}</td>}
+                        {showKlubb && <td>{data[1].klubb}</td>}
+                        {showKlasse && <td>{data[1].klasse}</td>}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

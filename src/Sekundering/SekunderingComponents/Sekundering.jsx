@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { OnStart } from "./sekunderingComponents/OnStart";
 import SekunderingResize from "./sekunderingComponents/SekunderingResize";
+import Helmet from "react-helmet";
+import Tabs from "../../Tabs";
 
 function Sekundering() {
   const [løpereData, setLøpereData] = useState(() => {
@@ -52,19 +54,35 @@ function Sekundering() {
   }, [location.state]);
 
   return (
-    <div className="sekundering">
-      {dataSant ? (
-        <SekunderingResize
-          løpereData={løpereData}
-          setLøpereData={setLøpereData}
+    <>
+      <Helmet>
+        <title>Sekundering av utdøvere</title>
+        <meta name="description" content="Sekunder løpere" />
+        <meta
+          name="keywords"
+          content="Sekundering, Sekunderings App, Sekunderingsprogram, Sekundering med EQtiming, Manuell sekundering"
         />
-      ) : (
-        <>
-          <p>Error: Failed to retrieve data.</p>
-          <Link to="/">Gå til side for å velge renn</Link>
-        </>
-      )}
-    </div>
+        <link rel="canonical" href="https://www.sekundering.no/sekundering" />
+      </Helmet>
+      <header>
+        <Tabs />
+      </header>
+      <main>
+        <div className="sekundering">
+          {dataSant ? (
+            <SekunderingResize
+              løpereData={løpereData}
+              setLøpereData={setLøpereData}
+            />
+          ) : (
+            <>
+              <p>Error: Failed to retrieve data.</p>
+              <Link to="/">Gå til side for å velge renn</Link>
+            </>
+          )}
+        </div>
+      </main>
+    </>
   );
 }
 

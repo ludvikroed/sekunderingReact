@@ -79,36 +79,41 @@ const SekunderingResize = ({ løpereData, setLøpereData }) => {
         className="constent-in-top-div"
         style={{ height: `${yPosition - 55}px` }}
       >
-        <VelgHvaSkalVisesPåKnapper
-          showDropdown={showDropdown}
-          setShowDropdown={setShowDropdown}
-        />
-        <LøpereButtons
-          løpereData={løpereData}
-          setLøpereData={setLøpereData}
-          selectedLøper={selectedLøper}
-          setSelectedLøper={setSelectedLøper}
-          setVisTider={setVisTider}
-          showDropdown={showDropdown}
-          setShowDropdown={setShowDropdown}
-        />
+        <section>
+          <VelgHvaSkalVisesPåKnapper
+            showDropdown={showDropdown}
+            setShowDropdown={setShowDropdown}
+          />
+        </section>
+        <section>
+          <LøpereButtons
+            løpereData={løpereData}
+            setLøpereData={setLøpereData}
+            selectedLøper={selectedLøper}
+            setSelectedLøper={setSelectedLøper}
+            setVisTider={setVisTider}
+            showDropdown={showDropdown}
+            setShowDropdown={setShowDropdown}
+          />
+        </section>
       </div>
-
-      <div
-        className="content-in-bottom-div"
-        style={{
-          top: `${yPosition + 33}px`,
-        }}
-      >
-        <RenderTider
-          className="render-tider"
-          index={selectedLøper}
-          løpereData={løpereData}
-          setLøpereData={setLøpereData}
-          visTider={visTider}
-          setVisTider={setVisTider}
-        />
-      </div>
+      <section>
+        <div
+          className="content-in-bottom-div"
+          style={{
+            top: `${yPosition + 33}px`,
+          }}
+        >
+          <RenderTider
+            className="render-tider"
+            index={selectedLøper}
+            løpereData={løpereData}
+            setLøpereData={setLøpereData}
+            visTider={visTider}
+            setVisTider={setVisTider}
+          />
+        </div>
+      </section>
     </div>
   );
 };
