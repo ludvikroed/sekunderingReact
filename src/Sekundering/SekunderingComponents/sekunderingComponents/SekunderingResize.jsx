@@ -3,13 +3,12 @@ import LøpereButtons from "./LøpereButtons";
 import RenderTider from "./RenderTider";
 import VelgHvaSkalVisesPåKnapper from "./velgHvaSkalVisesPåKnapper";
 
-const SekunderingResize = ({ løpereData, setLøpereData }) => {
+const SekunderingResize = ({ løpereData, setLøpereData, errorMessage }) => {
   const [visTider, setVisTider] = useState(true);
   const [dragging, setDragging] = useState(false);
   const [yPosition, setYPosition] = useState(window.innerHeight - 400);
   const [selectedLøper, setSelectedLøper] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
-
 
   // skru av så man ikke kan scrolle
   useEffect(() => {
@@ -94,6 +93,7 @@ const SekunderingResize = ({ løpereData, setLøpereData }) => {
             setVisTider={setVisTider}
             showDropdown={showDropdown}
             setShowDropdown={setShowDropdown}
+            errorMessage={errorMessage}
           />
         </section>
       </div>

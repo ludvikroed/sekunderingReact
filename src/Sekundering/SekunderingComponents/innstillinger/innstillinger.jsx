@@ -1,6 +1,6 @@
 import React from "react";
 import FjernPasseringer from "./components/FjernPasseringer";
-import Tabs from "../../../Tabs";
+import Tabs from "../tabs/Tabs";
 
 const Innstillinger = () => {
   function resetData() {

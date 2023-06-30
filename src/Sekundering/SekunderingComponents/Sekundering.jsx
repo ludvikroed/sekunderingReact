@@ -3,14 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import { OnStart } from "./sekunderingComponents/OnStart";
 import SekunderingResize from "./sekunderingComponents/SekunderingResize";
 import Helmet from "react-helmet";
-import Tabs from "../../Tabs";
-
+import Tabs from "./tabs/Tabs";
 function Sekundering() {
   const [løpereData, setLøpereData] = useState(() => {
     const løpereJson = sessionStorage.getItem("løpereData");
     return løpereJson ? JSON.parse(løpereJson) : [];
   });
-  const [dataSant, setDataSant] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
 
   useEffect(() => {
@@ -21,36 +20,54 @@ function Sekundering() {
       const løpereDataLocalStorage = sessionStorage.getItem("løpereData");
       setLøpereData(JSON.parse(løpereDataLocalStorage));
     } else {
-      let functionData;
-      if (data[1] === "Manuell") {
-        functionData = data[0];
-      } else {
-        functionData = OnStart(data);
-      }
+      if (data && data[1] === "Manuell") {
+        let functionData = data[0];
 
-      try {
-        delete data[1];
-        functionData = OnStart(data);
-      } catch (error) {
-        console.error("An error occurred during OnStart:", error);
-        setDataSant(false);
-      }
+        try {
+          delete data[1];
+          functionData = OnStart(data);
+        } catch (error) {
+          console.error("An error occurred during OnStart:", error);
+        }
 
-      if (functionData === undefined) {
-        setDataSant(false);
+        if (functionData === undefined) {
+        } else {
+          setLøpereData(functionData.løpere);
+          sessionStorage.setItem(
+            "løpereData",
+            JSON.stringify(functionData.løpere)
+          );
+          sessionStorage.setItem(
+            "firstLøpereData",
+            JSON.stringify(functionData.løpere)
+          );
+          sessionStorage.setItem("reruns", JSON.stringify(true));
+        }
       } else {
-        setLøpereData(functionData.løpere);
-        sessionStorage.setItem(
-          "løpereData",
-          JSON.stringify(functionData.løpere)
-        );
-        sessionStorage.setItem(
-          "firstLøpereData",
-          JSON.stringify(functionData.løpere)
-        );
-        sessionStorage.setItem("reruns", JSON.stringify(true));
+        // Handle the case when data or data[1] is not available
       }
     }
+    const isSessionStorageEmpty = () => {
+      return sessionStorage.length === 0;
+    };
+    if (isSessionStorageEmpty()) {
+      setErrorMessage(
+        <div>
+          Det ser ut til at noe har gått feil med innlasting av tider og navn.{" "}
+          <div>
+            <Link to="/">Trykk her for å gå til startsiden</Link>
+          </div>
+          <div>
+            <Link to="/renn"> Trykk her for å velge nye navn fra</Link>
+          </div>
+          <div>
+            <Link to="/manuell">
+              EQTiming. Trykk her for å legge inn tider og navn manuelt
+            </Link>
+          </div>
+        </div>
+      );
+    } 
   }, [location.state]);
 
   return (
@@ -69,17 +86,11 @@ function Sekundering() {
       </header>
       <main>
         <div className="sekundering">
-          {dataSant ? (
-            <SekunderingResize
-              løpereData={løpereData}
-              setLøpereData={setLøpereData}
-            />
-          ) : (
-            <>
-              <p>Error: Failed to retrieve data.</p>
-              <Link to="/">Gå til side for å velge renn</Link>
-            </>
-          )}
+          <SekunderingResize
+            errorMessage={errorMessage}
+            løpereData={løpereData}
+            setLøpereData={setLøpereData}
+          />
         </div>
       </main>
     </>

@@ -9,6 +9,7 @@ function LøpereButtons({
   setSelectedLøper,
   showDropdown,
   setVisTider,
+  errorMessage,
 }) {
   useEffect(() => {
     const storedVisAntallPasseringer = localStorage.getItem(
@@ -70,6 +71,7 @@ function LøpereButtons({
 
   return (
     <div className="button-grid">
+      {errorMessage}
       {løpereData.map((løper, index) => (
         <Fragment key={index}>
           <button

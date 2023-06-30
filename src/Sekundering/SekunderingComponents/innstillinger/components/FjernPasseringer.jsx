@@ -6,7 +6,8 @@ function FjernPasseringer() {
   const [visAdvarsel, setVisAdvarsel] = useState(false);
   const [ønsketFjernetPassering, setØnsketFjernetPassering] = useState(null);
 
-  const løpereData = JSON.parse(sessionStorage.getItem("løpereData"));
+  const løpereDataString = sessionStorage.getItem("løpereData");
+  const løpereData = løpereDataString ? JSON.parse(løpereDataString) : [];
 
   function fjernPasseringNow() {
     const copyLøpereData = [...løpereData];
