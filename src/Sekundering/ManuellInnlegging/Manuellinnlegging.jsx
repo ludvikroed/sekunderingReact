@@ -9,17 +9,24 @@ function ManuellInnlegging() {
   const [forFåLøpere, setForFåLøpere] = useState(false);
 
   return (
-    <div>
-      <h1>Manuell innlegging av tider og løpere</h1>
-      <Innstruksjoner />
-      <ImputText
-        løperData={løperData}
-        setLøperData={setLøperData}
-        forFåLøpere={forFåLøpere}
-        setForFåLøpere={setForFåLøpere}
-      />
-      <StartSekunderingButton løperData={løperData} forFåLøpere={forFåLøpere} />
-    </div>
+    <>
+      <header>
+        <h1>Manuell innlegging av tider og løpere</h1>
+      </header>
+      <main>
+        <Innstruksjoner />
+        <ImputText
+          løperData={løperData}
+          setLøperData={setLøperData}
+          forFåLøpere={forFåLøpere}
+          setForFåLøpere={setForFåLøpere}
+        />
+        <StartSekunderingButton
+          løperData={løperData}
+          forFåLøpere={forFåLøpere}
+        />
+      </main>
+    </>
   );
 }
 export default ManuellInnlegging;

@@ -4,71 +4,64 @@ import { OnStart } from "./sekunderingComponents/OnStart";
 import SekunderingResize from "./sekunderingComponents/SekunderingResize";
 import Helmet from "react-helmet";
 import Tabs from "./tabs/Tabs";
+
 function Sekundering() {
   const [løpereData, setLøpereData] = useState(() => {
     const løpereJson = sessionStorage.getItem("løpereData");
     return løpereJson ? JSON.parse(løpereJson) : [];
   });
-  const [errorMessage, setErrorMessage] = useState("");
+
   const location = useLocation();
 
   useEffect(() => {
-    const data = location.state;
-    const reruns = sessionStorage.getItem("reruns");
+    const loadData = async () => {
+      const data = location.state;
+      const reruns = sessionStorage.getItem("reruns");
 
-    if (reruns) {
-      const løpereDataLocalStorage = sessionStorage.getItem("løpereData");
-      setLøpereData(JSON.parse(løpereDataLocalStorage));
-    } else {
-      if (data && data[1] === "Manuell") {
-        let functionData = data[0];
-
+      if (reruns) {
+        const løpereDataLocalStorage = sessionStorage.getItem("løpereData");
+        setLøpereData(JSON.parse(løpereDataLocalStorage));
+      } else {
         try {
+          let functionData = data[0];
           delete data[1];
-          functionData = OnStart(data);
+          functionData = await OnStart(data);
+          if (functionData) {
+            setLøpereData(functionData.løpere);
+            sessionStorage.setItem("løpereData", JSON.stringify(functionData.løpere));
+            sessionStorage.setItem("firstLøpereData", JSON.stringify(functionData.løpere));
+            sessionStorage.setItem("reruns", JSON.stringify(true));
+          }
         } catch (error) {
           console.error("An error occurred during OnStart:", error);
         }
-
-        if (functionData === undefined) {
-        } else {
-          setLøpereData(functionData.løpere);
-          sessionStorage.setItem(
-            "løpereData",
-            JSON.stringify(functionData.løpere)
-          );
-          sessionStorage.setItem(
-            "firstLøpereData",
-            JSON.stringify(functionData.løpere)
-          );
-          sessionStorage.setItem("reruns", JSON.stringify(true));
-        }
-      } else {
-        // Handle the case when data or data[1] is not available
       }
-    }
-    const isSessionStorageEmpty = () => {
-      return sessionStorage.length === 0;
+
+      const isSessionStorageEmpty = sessionStorage.length === 0;
+      if (isSessionStorageEmpty) {
+        setErrorMessage(
+          <div>
+            Det ser ut til at noe har gått feil med innlasting av tider og navn.{" "}
+            <div>
+              <Link to="/">Trykk her for å gå til startsiden</Link>
+            </div>
+            <div>
+              <Link to="/renn"> Trykk her for å velge nye navn fra</Link>
+            </div>
+            <div>
+              <Link to="/manuell">
+                EQTiming. Trykk her for å legge inn tider og navn manuelt
+              </Link>
+            </div>
+          </div>
+        );
+      }
     };
-    if (isSessionStorageEmpty()) {
-      setErrorMessage(
-        <div>
-          Det ser ut til at noe har gått feil med innlasting av tider og navn.{" "}
-          <div>
-            <Link to="/">Trykk her for å gå til startsiden</Link>
-          </div>
-          <div>
-            <Link to="/renn"> Trykk her for å velge nye navn fra</Link>
-          </div>
-          <div>
-            <Link to="/manuell">
-              EQTiming. Trykk her for å legge inn tider og navn manuelt
-            </Link>
-          </div>
-        </div>
-      );
-    } 
+
+    loadData();
   }, [location.state]);
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   return (
     <>

@@ -33,8 +33,7 @@ const SekunderingResize = ({ løpereData, setLøpereData, errorMessage }) => {
     }
   };
 
-  const handleTouchStart = (e) => {
-    const touch = e.touches[0];
+  const handleTouchStart = () => {
     setDragging(true);
   };
 

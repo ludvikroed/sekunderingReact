@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import "./hjem.css"; // Import the CSS file
+import "./footer.css"
 
 function Hjem() {
   return (
@@ -37,9 +38,18 @@ function Hjem() {
         </div>
       </main>
       <footer>
-        <Link to="/info" className="footer">
-          Info
-        </Link>
+        <p>
+          På dette nettstedet kan du sekundere personer som driver med idrett.
+          Hvis konkurransen er på EQ Timing kan du finne startlisten her og
+          velge hvem du vil sekundere. Du kan også legge inn navn starttider å
+          annen informasjon manuelt hvis konkurransen ikke er på EQ Timing
+        </p>
+        <div className=".footer-email">
+          <p>
+            Hvis du har noen problemer eller noen tilbakemeldinger kan du sende
+            mail til lbroed@gmail.com
+          </p>
+        </div>
       </footer>
     </>
   );

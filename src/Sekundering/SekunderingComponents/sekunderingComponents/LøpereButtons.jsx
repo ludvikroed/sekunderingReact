@@ -1,6 +1,7 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { LøperPasserer } from "./LøperPasserer";
 import "./Sekundering.css";
+import CountdownTimer from "./CountdownTimer";
 
 function LøpereButtons({
   løpereData,
@@ -38,6 +39,7 @@ function LøpereButtons({
   }, [showDropdown]);
 
   const [showComponent, setShowComponent] = useState(false);
+  const [dataForNedteling, setDataForNedtelling] = useState({});
 
   const [visKlubb, setVisklubb] = useState(() => {
     const løpereJson = localStorage.getItem("visKlubb");
@@ -78,11 +80,16 @@ function LøpereButtons({
             className="button-sekundering"
             onClick={() => handleButtonClick(index)}
           >
-            {løper.navn}{" "}
+            {løper.navn}
+            <hr />
+            tid til leder for neste passering:
+            <CountdownTimer initialValue={-60} />
+
+            
             {visAntallPasseringer && (
               <>
                 <hr />
-                {"Passeringer "} {løper.antallPasseringer}
+                {"Passeringer: "} {løper.antallPasseringer}
               </>
             )}
             {visStartnummer && (
@@ -93,13 +100,15 @@ function LøpereButtons({
             )}
             {visKlasse && (
               <>
-                <hr /> {"Klasse: "} {løper.klasse}
+                <hr /> {"Klasse: "}
+                {løper.klasse}
               </>
             )}
             {visKlubb && (
               <>
                 <hr />
-                {"Klubb: "} {løper.klubb}
+                {"Klubb: "}
+                {løper.klubb}
               </>
             )}
           </button>
@@ -111,6 +120,8 @@ function LøpereButtons({
           løpereData={løpereData}
           setLøpereData={setLøpereData}
           setShowComponent={setShowComponent}
+          dataForNedteling={dataForNedteling}
+          setDataForNedtelling={setDataForNedtelling}
         />
       )}
     </div>

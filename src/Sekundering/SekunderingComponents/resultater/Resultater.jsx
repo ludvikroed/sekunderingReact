@@ -126,7 +126,7 @@ const Resultater = () => {
           </div>
         </section>
         <section>
-          <div className="resultater-container">
+                                                                                                                                                                      <div className="resultater-container">
             {ferdigLøpereArray.map((passering, index1) => (
               <div key={index1}>
                 <h2>Passering {index1 + 1}</h2>
@@ -163,12 +163,6 @@ const Resultater = () => {
       </main>
     </>
   );
-}
-
-
-
-
-
-
+};
 
 export default Resultater;

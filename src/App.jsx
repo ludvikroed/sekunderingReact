@@ -5,9 +5,7 @@ import AlleRenn from "./Sekundering/AlleRennComponents/AlleRenn.jsx";
 import Startliste from "./Sekundering/StartlisteComponents/Startliste";
 import Sekundering from "./Sekundering/SekunderingComponents/Sekundering.jsx";
 import Innstillinger from "./Sekundering/SekunderingComponents/innstillinger/innstillinger.jsx";
-import Tabs from "./Sekundering/SekunderingComponents/tabs/Tabs.jsx";
 import Resultater from "./Sekundering/SekunderingComponents/resultater/Resultater.jsx";
-import Info from "./Hjem/Info.jsx";
 import Hjem from "./Hjem/Hjem.jsx";
 import ManuellInnlegging from "./Sekundering/ManuellInnlegging/Manuellinnlegging.jsx";
 import AlleRitt from "./Sekundering/ritt/AlleRittComponents/AlleRitt.jsx";
@@ -29,7 +27,6 @@ const App = () => {
           }
         />
         <Route path="/" element={<Hjem />} />
-        <Route path="/info" element={<Info />} />
         <Route path="/manuell" element={<ManuellInnlegging />} />
         <Route path="/renn" element={<AlleRenn />} />
         <Route path="/renn/startliste/:id" element={<Startliste />} />
