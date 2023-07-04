@@ -10,7 +10,6 @@ export function CallApiAndSort(dag, sport, søk, isChecked) {
   const formatedFromDate = fromDate.toISOString().slice(0, 10);
   const formatedToDate = toDate.toISOString().slice(0, 10);
   
-  
   let date;
   if (isChecked) {
     date = formatedFromDate + "+00%3A00&dateTo=" + formatedToDate + "+23%3A59";
@@ -98,6 +97,7 @@ export function CallApiAndSort(dag, sport, søk, isChecked) {
     })
     .catch((error) => {
       console.error(error);
+      return "error"
     });
 }
 

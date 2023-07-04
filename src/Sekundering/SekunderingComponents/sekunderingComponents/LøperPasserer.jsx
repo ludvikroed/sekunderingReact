@@ -4,7 +4,7 @@ export function LøperPasserer({
   løpereData,
   setLøpereData,
   setShowComponent,
-  dataForNedteling,
+  dataForNedtelling,
   setDataForNedtelling,
 }) {
   function timeSinceMidnight() {
@@ -18,15 +18,16 @@ export function LøperPasserer({
   const time = timeSinceMidnight();
 
   useEffect(() => {
-    // make sure to create a new copy of løpereData before modifying it
+    // sekunderinge er under:
     const updatedLøpereData = [...løpereData];
     updatedLøpereData[index]["antallPasseringer"] += 0.5;
     const antallPasseringer = updatedLøpereData[index]["antallPasseringer"];
     updatedLøpereData[index]["passering" + antallPasseringer] = time;
-
     setLøpereData(updatedLøpereData);
     sessionStorage.setItem("løpereData", JSON.stringify(updatedLøpereData));
     setShowComponent(false);
+
+    // greia for å telle ned på knapper er under:
     let maxPasseringer = -Infinity;
     let maxIndices = [];
 
@@ -38,17 +39,37 @@ export function LøperPasserer({
         maxIndices.push(i);
       }
     }
-    const flestPasseringer = []
+    const copyDataForNedtelling = { ...dataForNedtelling };
+    const flestPasseringer = [];
     maxIndices.forEach((index) => {
-      flestPasseringer.push(index)
+      flestPasseringer.push(index);
     });
-    console.log(flestPasseringer)
-    
-    dataForNedteling.flestPasseringer = flestPasseringer
+    copyDataForNedtelling.flestPasseringer = flestPasseringer;
+    const passering = time - updatedLøpereData[index]["startTidSekunder"];
 
-    //hvem som har passert mest og er føsrts i løypa. 
+    if (copyDataForNedtelling["passeringer"] === undefined) {
+      copyDataForNedtelling["passeringer"] = {};
+      copyDataForNedtelling["passeringer"]["passering" + antallPasseringer] =
+        passering;
+    } else {
+      if (
+        copyDataForNedtelling["passeringer"][
+          "passering" + antallPasseringer
+        ] === undefined
+      ) {
+        copyDataForNedtelling["passeringer"]["passering" + antallPasseringer] =
+          passering;
+      } else {
+        const initialValue =
+          copyDataForNedtelling["passeringer"]["passering" + antallPasseringer];
+        if (initialValue > passering){
+          copyDataForNedtelling["passeringer"]["passering" + antallPasseringer] = passering
+        }
+      }
+    }
+    setDataForNedtelling(copyDataForNedtelling);
+    //hvem som har passert mest og er føsrts i løypa.
     //hvem som ikke kan telle ned fordi det er ingen som har passert på neste
-
   }, []);
 
   // return something else here since this component is not being rendered anymore

@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-function CountdownTimer({ initialValue }) {
+function CountdownTimer({ initialValue, updateTimer }) {
   const [remainingTime, setRemainingTime] = useState(initialValue);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setRemainingTime(initialValue);
+    }, 200);
+
+    return () => {
+      clearTimeout(timerId); // Cleanup the timer if the component unmounts or the dependency changes before the timeout
+    };
+  }, [initialValue, updateTimer]);
 
   useEffect(() => {
     const interval = setInterval(() => {

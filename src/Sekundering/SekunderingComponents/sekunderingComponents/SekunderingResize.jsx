@@ -9,6 +9,17 @@ const SekunderingResize = ({ løpereData, setLøpereData, errorMessage }) => {
   const [yPosition, setYPosition] = useState(window.innerHeight - 400);
   const [selectedLøper, setSelectedLøper] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [dataForNedtelling, setDataForNedtelling] = useState(() => {
+    const løpereJson = sessionStorage.getItem("dataForNedtelling");
+    return løpereJson ? JSON.parse(løpereJson) : {};
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem(
+      "dataForNedtelling",
+      JSON.stringify(dataForNedtelling)
+    );
+  }, [dataForNedtelling]);
 
   // skru av så man ikke kan scrolle
   useEffect(() => {
@@ -93,6 +104,8 @@ const SekunderingResize = ({ løpereData, setLøpereData, errorMessage }) => {
             showDropdown={showDropdown}
             setShowDropdown={setShowDropdown}
             errorMessage={errorMessage}
+            dataForNedtelling={dataForNedtelling}
+            setDataForNedtelling={setDataForNedtelling}
           />
         </section>
       </div>
@@ -110,6 +123,8 @@ const SekunderingResize = ({ løpereData, setLøpereData, errorMessage }) => {
             setLøpereData={setLøpereData}
             visTider={visTider}
             setVisTider={setVisTider}
+            dataForNedtelling={dataForNedtelling}
+            setDataForNedtelling={setDataForNedtelling}
           />
         </div>
       </section>

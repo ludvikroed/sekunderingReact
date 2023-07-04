@@ -35,8 +35,13 @@ const AlleRenn = () => {
     setIsLoading(true);
     CallApiAndSort(dag, sport, søk, isChecked)
       .then((response) => {
-        setRenn(response);
-        setIsLoading(false);
+        if (response === "error") {
+          setIsLoading(false);
+          serError(true);
+        } else {
+          setRenn(response);
+          setIsLoading(false);
+        }
       })
       .catch((error) => {
         console.error(error);

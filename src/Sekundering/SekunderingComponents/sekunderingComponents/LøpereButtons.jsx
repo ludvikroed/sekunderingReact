@@ -11,7 +11,12 @@ function LøpereButtons({
   showDropdown,
   setVisTider,
   errorMessage,
+  dataForNedtelling,
+  setDataForNedtelling,
 }) {
+  const [updateTimer, setUpdateTimer] = useState(0);
+  const [showComponent, setShowComponent] = useState(false);
+
   useEffect(() => {
     const storedVisAntallPasseringer = localStorage.getItem(
       "visAntallPasseringer"
@@ -37,9 +42,6 @@ function LøpereButtons({
       : false;
     setVisStartnummer(parsedVisStartnummer);
   }, [showDropdown]);
-
-  const [showComponent, setShowComponent] = useState(false);
-  const [dataForNedteling, setDataForNedtelling] = useState({});
 
   const [visKlubb, setVisklubb] = useState(() => {
     const løpereJson = localStorage.getItem("visKlubb");
@@ -69,7 +71,17 @@ function LøpereButtons({
     setSelectedLøper(index);
     setShowComponent(true);
     setVisTider(true);
+    setUpdateTimer(updateTimer + 1);
   };
+
+  function timeSinceMidnight() {
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(0, 0, 0, 0);
+    const diffInMs = now.getTime() - midnight.getTime();
+    const diffInSec = diffInMs / 1000;
+    return diffInSec.toFixed(1);
+  }
 
   return (
     <div className="button-grid">
@@ -82,10 +94,31 @@ function LøpereButtons({
           >
             {løper.navn}
             <hr />
-            tid til leder for neste passering:
-            <CountdownTimer initialValue={-60} />
-
-            
+            Diff til leder for neste passering
+            {(() => {
+              try {
+                if (dataForNedtelling["flestPasseringer"].includes(index)) {
+                  return <p>Ingen har passert på neste</p>;
+                } else {
+                  return (
+                    <>
+                      <CountdownTimer
+                        updateTimer={updateTimer}
+                        initialValue={Math.round(
+                          timeSinceMidnight() -
+                            løper.startTidSekunder -
+                            dataForNedtelling["passeringer"][
+                              "passering" + (løper.antallPasseringer + 1)
+                            ]
+                        )}
+                      />
+                    </>
+                  );
+                }
+              } catch (error) {
+                return <p>ingen har passert</p>;
+              }
+            })()}
             {visAntallPasseringer && (
               <>
                 <hr />
@@ -120,12 +153,11 @@ function LøpereButtons({
           løpereData={løpereData}
           setLøpereData={setLøpereData}
           setShowComponent={setShowComponent}
-          dataForNedteling={dataForNedteling}
+          dataForNedtelling={dataForNedtelling}
           setDataForNedtelling={setDataForNedtelling}
         />
       )}
     </div>
   );
 }
-
 export default LøpereButtons;

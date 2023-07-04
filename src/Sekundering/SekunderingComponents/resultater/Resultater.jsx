@@ -24,12 +24,23 @@ const Resultater = () => {
 
     passeringerLøpereList.push([passeringValues, i]);
   }
-  const antallPasseringer = Math.max(...antallPasseringerList);
-  const antallLøpere = passeringerLøpereList.length;
+  const editedPasseringerLøpereList = passeringerLøpereList.map(
+    (data, index) => {
+
+      const startTid = data[1]["startTidSekunder"];
+      const endraTider = data[0].map((data) => {
+        const tidSidenMidnatt = parseFloat(data);
+        return tidSidenMidnatt - startTid;
+      });
+      return [endraTider, data[1]]
+    }
+  );
+
+  const antallLøpere = editedPasseringerLøpereList.length;
 
   const ferdigLøpereList = {};
   for (let i = 0; i < antallLøpere; i++) {
-    const løperData = passeringerLøpereList[i];
+    const løperData = editedPasseringerLøpereList[i];
     for (let j = 0; j < løperData[0].length; j++) {
       if (!ferdigLøpereList["passering" + (j + 1)]) {
         ferdigLøpereList["passering" + (j + 1)] = [];
@@ -48,7 +59,11 @@ const Resultater = () => {
     );
   }
 
-  const ferdigLøpereArray = Object.values(ferdigLøpereList);
+  const ferdigLøpereArrayfeil = Object.values(ferdigLøpereList);
+
+  const ferdigLøpereArray = ferdigLøpereArrayfeil.map((data, index) => {
+    return data;
+  });
 
   const [showKlasse, setShowKlasse] = useState(true);
   const [showKlubb, setShowKlubb] = useState(true);
@@ -76,6 +91,18 @@ const Resultater = () => {
       </>
     );
   }
+
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    const secondsOneDecimal = remainingSeconds.toFixed(1);
+
+    const formattedMinutes = String(minutes).padStart(2, "0");
+    const formattedSeconds = String(secondsOneDecimal).padStart(2, "0");
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+  }
+
 
   return (
     <>
@@ -126,7 +153,7 @@ const Resultater = () => {
           </div>
         </section>
         <section>
-                                                                                                                                                                      <div className="resultater-container">
+          <div className="resultater-container">
             {ferdigLøpereArray.map((passering, index1) => (
               <div key={index1}>
                 <h2>Passering {index1 + 1}</h2>
@@ -137,7 +164,7 @@ const Resultater = () => {
                         <th></th>
                         <th>Navn</th>
                         <th>Tid bak</th>
-                        {showStartnummer && <th>Startnummer</th>}
+                        {showStartnummer && <th>st.nr</th>}
                         {showKlubb && <th>Klubb</th>}
                         {showKlasse && <th>Klasse</th>}
                       </tr>
@@ -147,7 +174,9 @@ const Resultater = () => {
                         <tr key={index2}>
                           <td>{index2 + 1}</td>
                           <td>{data[1].navn}</td>
-                          <td>{(data[0] - passering[0][0]).toFixed(1)}</td>
+                          <td>
+                            {formatTime((data[0] - passering[0][0]))}
+                          </td>
                           {showStartnummer && <td>{data[1].startNummer}</td>}
                           {showKlubb && <td>{data[1].klubb}</td>}
                           {showKlasse && <td>{data[1].klasse}</td>}

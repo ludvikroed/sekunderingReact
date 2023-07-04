@@ -8,8 +8,9 @@ function RenderTider({
   setLøpereData,
   visTider,
   setVisTider,
+  dataForNedtelling,
+  setDataForNedtelling,
 }) {
-
   if (index == null) {
     return (
       <div>
@@ -57,8 +58,22 @@ function RenderTider({
     );
   }
 
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    const secondsOneDecimal = remainingSeconds.toFixed(0);
+
+    const formattedMinutes = String(minutes).padStart(2, "0");
+    const formattedSeconds = String(secondsOneDecimal).padStart(2, "0");
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+  }
+
+
+
   if (antallLøpereMedSammePasseringer > 1) {
     const forskjellForLøperKnapp = løperKlickPassering - løperKlickStartTidSek;
+
     const svar = løpereData.map((runner, index) => {
       if (
         antallPasseringerListeWithoutNull.includes(index) &&
@@ -82,7 +97,7 @@ function RenderTider({
         const forskjellPåLøpereAbsEn = forskjellPåLøpereAbs.toFixed(1);
         return (
           <p key={index}>
-            {forskjellPåLøpereAbsEn}
+            {formatTime(forskjellPåLøpereAbsEn)}
             {sekunder}
             {bakEllerForan}
             {runner["navn"]}
