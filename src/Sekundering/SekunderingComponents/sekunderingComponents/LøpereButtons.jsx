@@ -13,6 +13,7 @@ function LøpereButtons({
   errorMessage,
   dataForNedtelling,
   setDataForNedtelling,
+  setVisPasseringer,
 }) {
   const [updateTimer, setUpdateTimer] = useState(0);
   const [showComponent, setShowComponent] = useState(false);
@@ -41,6 +42,12 @@ function LøpereButtons({
       ? JSON.parse(storedVisStartnummer)
       : false;
     setVisStartnummer(parsedVisStartnummer);
+
+    const storedVisDiffTilLeder = localStorage.getItem("visDiffTilLeder");
+    const parsedVisDiffTilLeder = storedVisDiffTilLeder
+      ? JSON.parse(storedVisDiffTilLeder)
+      : false;
+    setVisDiffTilLeder(parsedVisDiffTilLeder);
   }, [showDropdown]);
 
   const [visKlubb, setVisklubb] = useState(() => {
@@ -60,7 +67,12 @@ function LøpereButtons({
 
   const [visAntallPasseringer, setVisAntallPasseringer] = useState(() => {
     const løpereJson = localStorage.getItem("visAntallPasseringer");
-    return løpereJson ? JSON.parse(løpereJson) : false;
+    return løpereJson ? JSON.parse(løpereJson) : true;
+  });
+
+  const [visDiffTilLeder, setVisDiffTilLeder] = useState(() => {
+    const løpereJson = localStorage.getItem("visDiffTilLeder");
+    return løpereJson ? JSON.parse(løpereJson) : true;
   });
 
   if (!løpereData) {
@@ -72,6 +84,7 @@ function LøpereButtons({
     setShowComponent(true);
     setVisTider(true);
     setUpdateTimer(updateTimer + 1);
+    setVisPasseringer(true)
   };
 
   function timeSinceMidnight() {
@@ -93,32 +106,36 @@ function LøpereButtons({
             onClick={() => handleButtonClick(index)}
           >
             {løper.navn}
-            <hr />
-            Diff til leder for neste passering
-            {(() => {
-              try {
-                if (dataForNedtelling["flestPasseringer"].includes(index)) {
-                  return <p>Ingen har passert på neste</p>;
-                } else {
-                  return (
-                    <>
-                      <CountdownTimer
-                        updateTimer={updateTimer}
-                        initialValue={Math.round(
-                          timeSinceMidnight() -
-                            løper.startTidSekunder -
-                            dataForNedtelling["passeringer"][
-                              "passering" + (løper.antallPasseringer + 1)
-                            ]
-                        )}
-                      />
-                    </>
-                  );
-                }
-              } catch (error) {
-                return <p>ingen har passert</p>;
-              }
-            })()}
+            {visDiffTilLeder && (
+              <>
+                <hr />
+                Diff til leder for neste passering
+                {(() => {
+                  try {
+                    if (dataForNedtelling["flestPasseringer"].includes(index)) {
+                      return <p>Ingen har passert på neste</p>;
+                    } else {
+                      return (
+                        <>
+                          <CountdownTimer
+                            updateTimer={updateTimer}
+                            initialValue={Math.round(
+                              timeSinceMidnight() -
+                                løper.startTidSekunder -
+                                dataForNedtelling["passeringer"][
+                                  "passering" + (løper.antallPasseringer + 1)
+                                ]
+                            )}
+                          />
+                        </>
+                      );
+                    }
+                  } catch (error) {
+                    return <p>ingen har passert</p>;
+                  }
+                })()}
+              </>
+            )}
             {visAntallPasseringer && (
               <>
                 <hr />

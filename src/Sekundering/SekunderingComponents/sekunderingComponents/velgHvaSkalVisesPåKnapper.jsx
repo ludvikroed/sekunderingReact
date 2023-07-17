@@ -51,6 +51,11 @@ function VelgHvaSkalVisesPåKnapper({ showDropdown, setShowDropdown }) {
     return storedVisKlubb ? JSON.parse(storedVisKlubb) : false;
   });
 
+  const [visDiffTilLeder, setVisDiffTilLeder] = useState(() => {
+    const løpereJson = localStorage.getItem("visDiffTilLeder");
+    return løpereJson ? JSON.parse(løpereJson) : false;
+  });
+
   const handleDropdownToggle = () => {
     setShowDropdown(!showDropdown);
   };
@@ -65,6 +70,14 @@ function VelgHvaSkalVisesPåKnapper({ showDropdown, setShowDropdown }) {
   const visKlasseFunc = (event) => {
     localStorage.setItem("visKlasse", JSON.stringify(event.target.checked));
     setVisKlasse(event.target.checked);
+  };
+
+  const visDiffTilLederFunc = (event) => {
+    localStorage.setItem(
+      "visDiffTilLeder",
+      JSON.stringify(event.target.checked)
+    );
+    setVisDiffTilLeder(event.target.checked);
   };
 
   const visStartnummerFunc = (event) => {
@@ -92,6 +105,18 @@ function VelgHvaSkalVisesPåKnapper({ showDropdown, setShowDropdown }) {
       {showDropdown && (
         <div>
           <div>
+            <div className="checkbox-div">
+              <label className="container-checkbox">
+                <input
+                  className="my-checkbox"
+                  type="checkbox"
+                  checked={visDiffTilLeder}
+                  onChange={visDiffTilLederFunc}
+                />
+                <span className="checkmark"></span>
+                Vis diff til leder på neste passering
+              </label>
+            </div>
             <div className="checkbox-div">
               <label className="container-checkbox">
                 <input

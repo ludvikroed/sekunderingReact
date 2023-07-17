@@ -24,9 +24,10 @@ function StartSekunderingButton({ løperData, forFåLøpere }) {
 
     const nyLøpereData = data.map((data) => {
       data["startTidSekunder"] = gøreTidTilSekunder(data["starttid"]);
-      data["antallPasseringer"] = 0
+      data["antallPasseringer"] = 0;
       return data;
     });
+
     const allData = [
       { antallLøpere: nyLøpereData.length, løpere: nyLøpereData },
       "Manuell",

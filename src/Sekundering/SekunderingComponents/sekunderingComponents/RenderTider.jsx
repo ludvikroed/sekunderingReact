@@ -53,6 +53,8 @@ function RenderTider({
           setLøpereData={setLøpereData}
           setVisTider={setVisTider}
           visTider={visTider}
+          dataForNedtelling={dataForNedtelling}
+          setDataForNedtelling={setDataForNedtelling}
         />
       </div>
     );
@@ -68,8 +70,6 @@ function RenderTider({
 
     return `${formattedMinutes}:${formattedSeconds}`;
   }
-
-
 
   if (antallLøpereMedSammePasseringer > 1) {
     const forskjellForLøperKnapp = løperKlickPassering - løperKlickStartTidSek;
@@ -118,6 +118,8 @@ function RenderTider({
           setLøpereData={setLøpereData}
           setVisTider={setVisTider}
           visTider={visTider}
+          dataForNedtelling={dataForNedtelling}
+          setDataForNedtelling={setDataForNedtelling}
         />
       </div>
     );

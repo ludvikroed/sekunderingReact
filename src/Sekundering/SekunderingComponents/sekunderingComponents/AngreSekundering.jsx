@@ -6,6 +6,8 @@ function AngreSekundering({
   setLøpereData,
   visTider,
   setVisTider,
+  dataForNedtelling,
+  setDataForNedtelling,
 }) {
   function AngreSekunderingButton() {
     const løpereDatacopy = [...løpereData];
@@ -16,7 +18,25 @@ function AngreSekundering({
     setLøpereData(løpereDatacopy);
     sessionStorage.setItem("løpereData", JSON.stringify(løpereDatacopy));
     setVisTider(false);
+
+    const dataForNedtellingCopy = { ...dataForNedtelling };
+    console.log(dataForNedtellingCopy["flestPasseringer"]);
+
+    const flestPasseringer = dataForNedtellingCopy["flestPasseringer"];
+    if (flestPasseringer.includes(index)) {
+      const updatedFlestPasseringer = flestPasseringer.filter(
+        (value) => value !== index
+      );
+      dataForNedtellingCopy["flestPasseringer"] = updatedFlestPasseringer;
+      console.log("Value removed from the array");
+    } else {
+      console.log("Value not found in the array");
+    }
+    console.log(dataForNedtellingCopy["flestPasseringer"]);
+
+    setDataForNedtelling(dataForNedtellingCopy);
   }
+
   return (
     <div>
       {(visTider && (

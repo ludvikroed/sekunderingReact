@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import LøpereButtons from "./LøpereButtons";
 import RenderTider from "./RenderTider";
 import VelgHvaSkalVisesPåKnapper from "./velgHvaSkalVisesPåKnapper";
+import SpesefikData from "./SpesefikData";
 
 const SekunderingResize = ({ løpereData, setLøpereData, errorMessage }) => {
   const [visTider, setVisTider] = useState(true);
@@ -9,6 +10,9 @@ const SekunderingResize = ({ løpereData, setLøpereData, errorMessage }) => {
   const [yPosition, setYPosition] = useState(window.innerHeight - 400);
   const [selectedLøper, setSelectedLøper] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
+
+  const [visPasseringer, setVisPasseringer] = useState(true);
+
   const [dataForNedtelling, setDataForNedtelling] = useState(() => {
     const løpereJson = sessionStorage.getItem("dataForNedtelling");
     return løpereJson ? JSON.parse(løpereJson) : {};
@@ -106,6 +110,7 @@ const SekunderingResize = ({ løpereData, setLøpereData, errorMessage }) => {
             errorMessage={errorMessage}
             dataForNedtelling={dataForNedtelling}
             setDataForNedtelling={setDataForNedtelling}
+            setVisPasseringer={setVisPasseringer}
           />
         </section>
       </div>

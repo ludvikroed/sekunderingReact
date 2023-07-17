@@ -99,8 +99,14 @@ const Resultater = () => {
 
     const formattedMinutes = String(minutes).padStart(2, "0");
     const formattedSeconds = String(secondsOneDecimal).padStart(2, "0");
-
+    if (seconds < 61){
+      return formattedSeconds
+    }else{
     return `${formattedMinutes}:${formattedSeconds}`;
+
+    }
+    
+
   }
 
 

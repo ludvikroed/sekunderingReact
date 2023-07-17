@@ -33,7 +33,16 @@ function Sekundering() {
             sessionStorage.setItem("reruns", JSON.stringify(true));
           }
         } catch (error) {
-          console.error("An error occurred during OnStart:", error);
+          setLøpereData(data[0]["løpere"])
+          sessionStorage.setItem(
+            "løpereData",
+            JSON.stringify(data[0]["løpere"])
+          );
+          sessionStorage.setItem(
+            "firstLøpereData",
+            JSON.stringify(data[0]["løpere"])
+          );
+          sessionStorage.setItem("reruns", JSON.stringify(true));
         }
       }
 
