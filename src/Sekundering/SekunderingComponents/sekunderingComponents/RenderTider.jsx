@@ -84,7 +84,6 @@ function RenderTider({
           runner["startTidSekunder"];
         const forskjellPåLøpere = forskjellForAndre - forskjellForLøperKnapp;
 
-        const sekunder = " sekunder ";
         let bakEllerForan;
         if (forskjellPåLøpere > 0) {
           bakEllerForan = "foran ";
@@ -97,9 +96,7 @@ function RenderTider({
         const forskjellPåLøpereAbsEn = forskjellPåLøpereAbs.toFixed(1);
         return (
           <p key={index}>
-            {formatTime(forskjellPåLøpereAbsEn)}
-            {sekunder}
-            {bakEllerForan}
+            {formatTime(forskjellPåLøpereAbsEn)} {bakEllerForan}
             {runner["navn"]}
           </p>
         );
@@ -112,6 +109,7 @@ function RenderTider({
           <h2>{løpereData[index]["navn"]} er</h2>
         </div>
         <div>{svar}</div>
+        <div><p>Tider er i fromatet mm:ss</p></div>
         <AngreSekundering
           index={index}
           løpereData={løpereData}

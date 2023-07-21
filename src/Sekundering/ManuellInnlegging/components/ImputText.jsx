@@ -42,33 +42,143 @@ function InputText({ løperData, setLøperData, forFåLøpere, setForFåLøpere 
     setLøperData(updatedLøperData);
   };
 
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth - 48);
+
+  useEffect(() => {
+    // Function to update the viewport width when the window is resized
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth - 48);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const [riktigFormatTid, setRiktigFormatTid] = useState({});
+
+  const riktigFormat = (klokkeslett, index) => {
+    const data = { ...riktigFormatTid };
+
+    const lengde = klokkeslett.length;
+    const sisteTegn = klokkeslett[lengde - 1];
+
+    let riktigFormat = true;
+    
+
+    if (lengde >= 1) {
+      const tegn = klokkeslett[0];
+      const parsed = parseInt(tegn);
+
+      if (!parsed) {
+        console.log("feil 1");
+        riktigFormat = false;
+      }
+    }
+    if (lengde >= 2) {
+      const tegn = klokkeslett[1];
+      const parsed = parseInt(tegn);
+
+      if (!parsed) {
+        console.log("feil 2");
+        riktigFormat = false;
+      }
+    }
+    if (lengde >= 3) {
+      const tegn = klokkeslett[2];
+      console.log(tegn, "here");
+
+      if (!tegn === ":") {
+        console.log("feil 3");
+        riktigFormat = false;
+      }
+    }
+    if (lengde >= 4) {
+      const tegn = klokkeslett[3];
+      const parsed = parseInt(tegn);
+
+      if (!parsed) {
+        console.log("feil 4");
+        riktigFormat = false;
+      }
+    }
+    if (lengde >= 5) {
+      const tegn = klokkeslett[4];
+      const parsed = parseInt(tegn);
+
+      if (!parsed) {
+        console.log("feil 5");
+        riktigFormat = false;
+      }
+    }
+    if (lengde >= 6) {
+      const tegn = klokkeslett[5];
+      const parsed = parseInt(tegn);
+
+      if (!tegn === ":") {
+        console.log("feil 6");
+        riktigFormat = false;
+      }
+    }
+    if (lengde >= 7) {
+      const tegn = klokkeslett[6];
+      const parsed = parseInt(tegn);
+
+      if (!parsed) {
+        console.log("feil 7");
+        riktigFormat = false;
+      }
+    }
+    if (lengde === 8) {
+      const tegn = klokkeslett[7];
+      const parsed = parseInt(tegn);
+
+      if (!parsed) {
+        console.log("feil 8");
+        riktigFormat = false;
+      }
+    }
+    if (lengde > 8) {
+      riktigFormat = false;
+    }
+
+    console.log(riktigFormat);
+  };
+
   const renderLøperFields = () => {
     const løperFields = [];
     for (let i = 0; i < antallLøpere; i++) {
       løperFields.push(
-        <div key={i}>
-          <p>Navn løper {i + 1}</p>
+        <div className="enkelt-løper" key={i}>
+          <h2 className="løper-nummer">Løper {i + 1}:</h2>
+          <p>Navn:</p>
           <input
-            style={{ width: "96%" }}
+            style={{ width: viewportWidth }}
             type="text"
             placeholder="Navn"
             onChange={(e) => handleLøperInputChange(i, "navn", e.target.value)}
           />
-          <p>Starttid løper {i + 1}</p>
+          <p>Starttid:</p>
           <input
-            style={{ width: "96%" }}
+            style={{ width: viewportWidth }}
             type="text"
-            pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}"
             placeholder="tt:mm:ss"
-            onChange={(e) =>
-              handleLøperInputChange(i, "starttid", e.target.value)
-            }
+            onChange={(e) => {
+              handleLøperInputChange(i, "starttid", e.target.value);
+              riktigFormat(e.target.value, i);
+            }}
           />
+          <div>{}</div>
+
           {startnummer && (
             <>
-              <p>Startnummer løper {i + 1}</p>
+              <p>Startnummer:</p>
               <input
-                style={{ width: "96%" }}
+                style={{ width: viewportWidth }}
                 type="text"
                 placeholder="Startnummer"
                 onChange={(e) =>
@@ -79,9 +189,9 @@ function InputText({ løperData, setLøperData, forFåLøpere, setForFåLøpere 
           )}
           {klasse && (
             <>
-              <p>Klasse løper {i + 1}</p>
+              <p>Klasse:</p>
               <input
-                style={{ width: "96%" }}
+                style={{ width: viewportWidth }}
                 type="text"
                 placeholder="Klasse"
                 onChange={(e) =>
@@ -92,9 +202,9 @@ function InputText({ løperData, setLøperData, forFåLøpere, setForFåLøpere 
           )}
           {klubb && (
             <>
-              <p>Klubb løper {i + 1}</p>
+              <p>Klubb:</p>
               <input
-                style={{ width: "96%" }}
+                style={{ width: viewportWidth }}
                 type="text"
                 placeholder="Klubb"
                 onChange={(e) =>
@@ -147,9 +257,7 @@ function InputText({ løperData, setLøperData, forFåLøpere, setForFåLøpere 
           Klubb
         </label>
       </div>
-
       {renderLøperFields()}
-
       <p>
         {allFieldsFilled
           ? ""

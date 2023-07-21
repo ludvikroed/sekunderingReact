@@ -16,6 +16,22 @@
     background-color: #3e8e41;
 }
 
-.padding-bottom{
+.padding-bottom {
     padding-bottom: 50px;
 }
+
+.enkelt-løper {
+    background-color: #3e8e41;
+    padding-left: 5px;
+    border-radius: 7px;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+
+.løper-nummer {
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
