@@ -6,6 +6,14 @@ import Helmet from "react-helmet";
 import Tabs from "./tabs/Tabs";
 
 function Sekundering() {
+  // skru av så man ikke kan scrolle
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+  
   const [løpereData, setLøpereData] = useState(() => {
     const løpereJson = sessionStorage.getItem("løpereData");
     return løpereJson ? JSON.parse(løpereJson) : [];
@@ -28,12 +36,18 @@ function Sekundering() {
           functionData = await OnStart(data);
           if (functionData) {
             setLøpereData(functionData.løpere);
-            sessionStorage.setItem("løpereData", JSON.stringify(functionData.løpere));
-            sessionStorage.setItem("firstLøpereData", JSON.stringify(functionData.løpere));
+            sessionStorage.setItem(
+              "løpereData",
+              JSON.stringify(functionData.løpere)
+            );
+            sessionStorage.setItem(
+              "firstLøpereData",
+              JSON.stringify(functionData.løpere)
+            );
             sessionStorage.setItem("reruns", JSON.stringify(true));
           }
         } catch (error) {
-          setLøpereData(data[0]["løpere"])
+          setLøpereData(data[0]["løpere"]);
           sessionStorage.setItem(
             "løpereData",
             JSON.stringify(data[0]["løpere"])
@@ -69,6 +83,7 @@ function Sekundering() {
 
     loadData();
   }, [location.state]);
+  console.log(location);
 
   const [errorMessage, setErrorMessage] = useState("");
 

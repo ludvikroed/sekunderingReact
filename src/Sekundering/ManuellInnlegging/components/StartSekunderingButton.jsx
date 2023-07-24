@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function StartSekunderingButton({ løperData, forFåLøpere }) {
+function StartSekunderingButton({ løperData, alleFeltFylt }) {
   let navigate = useNavigate();
   const [hvisError, setHvisError] = useState(false);
 
@@ -20,9 +20,10 @@ function StartSekunderingButton({ løperData, forFåLøpere }) {
   const startSekundering = () => {
     setHvisError(false);
     sessionStorage.clear();
-    const data = [...løperData];
+    const dataObject = { ...løperData };
 
-    const nyLøpereData = data.map((data) => {
+    const nyLøpereData = Object.keys(dataObject).map((key) => {
+      const data = { ...dataObject[key] };
       data["startTidSekunder"] = gøreTidTilSekunder(data["starttid"]);
       data["antallPasseringer"] = 0;
       return data;
@@ -45,9 +46,11 @@ function StartSekunderingButton({ løperData, forFåLøpere }) {
           Du må velge minst to løpere for å starte sekundering.
         </div>
       ) : (
-        <button className="fixed-button" onClick={startSekundering}>
-          Start sekundering
-        </button>
+        alleFeltFylt && (
+          <button className="fixed-button" onClick={startSekundering}>
+            Start sekundering
+          </button>
+        )
       )}
     </div>
   );

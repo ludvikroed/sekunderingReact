@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import LøpereButtons from "./LøpereButtons";
 import RenderTider from "./RenderTider";
 import VelgHvaSkalVisesPåKnapper from "./velgHvaSkalVisesPåKnapper";
-import SpesefikData from "./SpesefikData";
 
 const SekunderingResize = ({ løpereData, setLøpereData, errorMessage }) => {
   const [visTider, setVisTider] = useState(true);
@@ -25,13 +24,7 @@ const SekunderingResize = ({ løpereData, setLøpereData, errorMessage }) => {
     );
   }, [dataForNedtelling]);
 
-  // skru av så man ikke kan scrolle
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);
+
 
   const handleMouseDown = (e) => {
     setDragging(true);

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./manuellinnlegging.css";
-function InputText({ løperData, setLøperData, forFåLøpere, setForFåLøpere }) {
+import TimeInputWithSeconds from "./timeInput";
+
+function InputText({ løperData, setLøperData, alleFeltFylt, setAlleFeltFylt }) {
   const [antallLøpere, setAntallLøpere] = useState(2);
   const [startnummer, setStartnummer] = useState(false);
   const [klasse, setKlasse] = useState(false);
   const [klubb, setKlubb] = useState(false);
+
   // Update løperData when antallLøpere changes
   useEffect(() => {
     setLøperData(
@@ -18,23 +21,8 @@ function InputText({ løperData, setLøperData, forFåLøpere, setForFåLøpere 
     );
   }, [antallLøpere]);
 
-  const [allFieldsFilled, setAllFieldsFilled] = useState(false);
-
-  useEffect(() => {
-    // Check if all the fields are filled out whenever løperData, antallLøpere, startnummer, klasse, or klubb changes
-    const isAllFieldsFilled = løperData.every(
-      (løper) =>
-        løper.navn &&
-        løper.starttid &&
-        (!startnummer || løper.startnummer) &&
-        (!klasse || løper.klasse) &&
-        (!klubb || løper.klubb)
-    );
-    setAllFieldsFilled(isAllFieldsFilled);
-  }, [løperData, antallLøpere, startnummer, klasse, klubb]);
-
   const handleLøperInputChange = (index, field, value) => {
-    const updatedLøperData = [...løperData];
+    const updatedLøperData = { ...løperData };
     updatedLøperData[index] = {
       ...updatedLøperData[index],
       [field]: value,
@@ -61,93 +49,55 @@ function InputText({ løperData, setLøperData, forFåLøpere, setForFåLøpere 
 
   const [riktigFormatTid, setRiktigFormatTid] = useState({});
 
-  const riktigFormat = (klokkeslett, index) => {
+  useEffect(() => {
     const data = { ...riktigFormatTid };
-
-    const lengde = klokkeslett.length;
-    const sisteTegn = klokkeslett[lengde - 1];
-
-    let riktigFormat = true;
-    
-
-    if (lengde >= 1) {
-      const tegn = klokkeslett[0];
-      const parsed = parseInt(tegn);
-
-      if (!parsed) {
-        console.log("feil 1");
-        riktigFormat = false;
-      }
+    for (let i = 0; i < antallLøpere; i++) {
+      data[i] = data[i] || { borderColor: false };
     }
-    if (lengde >= 2) {
-      const tegn = klokkeslett[1];
-      const parsed = parseInt(tegn);
+    setRiktigFormatTid(data);
+  }, [antallLøpere]);
 
-      if (!parsed) {
-        console.log("feil 2");
-        riktigFormat = false;
-      }
-    }
-    if (lengde >= 3) {
-      const tegn = klokkeslett[2];
-      console.log(tegn, "here");
+  const [hvilkeFeltFylt, setHvilkeFeltFylt] = useState({});
 
-      if (!tegn === ":") {
-        console.log("feil 3");
-        riktigFormat = false;
-      }
+  useEffect(() => {
+    const data = { ...hvilkeFeltFylt };
+    for (let i = 0; i < antallLøpere; i++) {
+      data[i] = data[i] || {
+        navn: false,
+        klasse: false,
+        klubb: false,
+        startnummer: false,
+        starttid: false,
+      };
     }
-    if (lengde >= 4) {
-      const tegn = klokkeslett[3];
-      const parsed = parseInt(tegn);
+    delete data[antallLøpere];
+    setHvilkeFeltFylt(data);
+  }, [antallLøpere]);
 
-      if (!parsed) {
-        console.log("feil 4");
-        riktigFormat = false;
-      }
-    }
-    if (lengde >= 5) {
-      const tegn = klokkeslett[4];
-      const parsed = parseInt(tegn);
-
-      if (!parsed) {
-        console.log("feil 5");
-        riktigFormat = false;
-      }
-    }
-    if (lengde >= 6) {
-      const tegn = klokkeslett[5];
-      const parsed = parseInt(tegn);
-
-      if (!tegn === ":") {
-        console.log("feil 6");
-        riktigFormat = false;
-      }
-    }
-    if (lengde >= 7) {
-      const tegn = klokkeslett[6];
-      const parsed = parseInt(tegn);
-
-      if (!parsed) {
-        console.log("feil 7");
-        riktigFormat = false;
-      }
-    }
-    if (lengde === 8) {
-      const tegn = klokkeslett[7];
-      const parsed = parseInt(tegn);
-
-      if (!parsed) {
-        console.log("feil 8");
-        riktigFormat = false;
-      }
-    }
-    if (lengde > 8) {
-      riktigFormat = false;
+  const erFylt = (felt, index, type) => {
+    const data = { ...hvilkeFeltFylt };
+    if (felt !== "") {
+      data[index][type] = true;
+    } else {
+      data[index][type] = false;
     }
 
-    console.log(riktigFormat);
+    setHvilkeFeltFylt(data);
   };
+
+  const erAlleFeltFylt = () => {
+    let fylt = true;
+    try {
+      for (let i = 0; i < antallLøpere; i++) {
+        if (!hvilkeFeltFylt[i]["navn"]) {
+          fylt = false;
+          break; // No need to continue the loop if fylt is already false
+        }
+      }
+    } catch (error) {}
+    setAlleFeltFylt(fylt);
+  };
+  erAlleFeltFylt();
 
   const renderLøperFields = () => {
     const løperFields = [];
@@ -157,33 +107,45 @@ function InputText({ løperData, setLøperData, forFåLøpere, setForFåLøpere 
           <h2 className="løper-nummer">Løper {i + 1}:</h2>
           <p>Navn:</p>
           <input
-            style={{ width: viewportWidth }}
+            style={{
+              width: viewportWidth,
+              borderWidth: "4px",
+              borderColor:
+                hvilkeFeltFylt[i]?.navn === true ? "green" : "red" || "red",
+            }}
             type="text"
             placeholder="Navn"
-            onChange={(e) => handleLøperInputChange(i, "navn", e.target.value)}
-          />
-          <p>Starttid:</p>
-          <input
-            style={{ width: viewportWidth }}
-            type="text"
-            placeholder="tt:mm:ss"
             onChange={(e) => {
-              handleLøperInputChange(i, "starttid", e.target.value);
-              riktigFormat(e.target.value, i);
+              handleLøperInputChange(i, "navn", e.target.value);
+              erFylt(e.target.value, i, "navn");
             }}
           />
+          <div className="starttid">
+            <TimeInputWithSeconds
+              index={i}
+              løperData={løperData}
+              setLøperData={setLøperData}
+            />
+          </div>
           <div>{}</div>
-
           {startnummer && (
             <>
               <p>Startnummer:</p>
               <input
-                style={{ width: viewportWidth }}
+                style={{
+                  width: viewportWidth,
+                  borderWidth: "4px",
+                  borderColor:
+                    hvilkeFeltFylt[i]?.startnummer === true
+                      ? "green"
+                      : "red" || "red",
+                }}
                 type="text"
                 placeholder="Startnummer"
-                onChange={(e) =>
-                  handleLøperInputChange(i, "startnummer", e.target.value)
-                }
+                onChange={(e) => {
+                  handleLøperInputChange(i, "startnummer", e.target.value);
+                  erFylt(e.target.value, i, "startnummer");
+                }}
               />
             </>
           )}
@@ -191,12 +153,20 @@ function InputText({ løperData, setLøperData, forFåLøpere, setForFåLøpere 
             <>
               <p>Klasse:</p>
               <input
-                style={{ width: viewportWidth }}
+                style={{
+                  width: viewportWidth,
+                  borderWidth: "4px",
+                  borderColor:
+                    hvilkeFeltFylt[i]?.klasse === true
+                      ? "green"
+                      : "red" || "red",
+                }}
                 type="text"
                 placeholder="Klasse"
-                onChange={(e) =>
-                  handleLøperInputChange(i, "klasse", e.target.value)
-                }
+                onChange={(e) => {
+                  handleLøperInputChange(i, "klasse", e.target.value);
+                  erFylt(e.target.value, i, "klasse");
+                }}
               />
             </>
           )}
@@ -204,12 +174,20 @@ function InputText({ løperData, setLøperData, forFåLøpere, setForFåLøpere 
             <>
               <p>Klubb:</p>
               <input
-                style={{ width: viewportWidth }}
+                style={{
+                  width: viewportWidth,
+                  borderWidth: "4px",
+                  borderColor:
+                    hvilkeFeltFylt[i]?.klubb === true
+                      ? "green"
+                      : "red" || "red",
+                }}
                 type="text"
                 placeholder="Klubb"
-                onChange={(e) =>
-                  handleLøperInputChange(i, "klubb", e.target.value)
-                }
+                onChange={(e) => {
+                  handleLøperInputChange(i, "klubb", e.target.value);
+                  erFylt(e.target.value, i, "klubb");
+                }}
               />
             </>
           )}
@@ -221,73 +199,68 @@ function InputText({ løperData, setLøperData, forFåLøpere, setForFåLøpere 
 
   return (
     <div>
-      <div className="checkbox-div">
-        <label className="container-checkbox">
-          <input
-            className="my-checkbox"
-            type="checkbox"
-            checked={startnummer}
-            onChange={() => setStartnummer(!startnummer)}
-          />
-          <span className="checkmark"></span>
-          Startnummer
-        </label>
-      </div>
-      <div className="checkbox-div">
-        <label className="container-checkbox">
-          <input
-            className="my-checkbox"
-            type="checkbox"
-            checked={klasse}
-            onChange={() => setKlasse(!klasse)}
-          />
-          <span className="checkmark"></span>
-          Klasse
-        </label>
-      </div>
-      <div className="checkbox-div">
-        <label className="container-checkbox">
-          <input
-            className="my-checkbox"
-            type="checkbox"
-            checked={klubb}
-            onChange={() => setKlubb(!klubb)}
-          />
-          <span className="checkmark"></span>
-          Klubb
-        </label>
+      <div className="enkelt-løper">
+        <div className="checkbox-div">
+          <label className="container-checkbox">
+            <input
+              className="my-checkbox"
+              type="checkbox"
+              checked={startnummer}
+              onChange={() => setStartnummer(!startnummer)}
+            />
+            <span className="checkmark"></span>
+            Startnummer
+          </label>
+        </div>
+        <div className="checkbox-div">
+          <label className="container-checkbox">
+            <input
+              className="my-checkbox"
+              type="checkbox"
+              checked={klasse}
+              onChange={() => setKlasse(!klasse)}
+            />
+            <span className="checkmark"></span>
+            Klasse
+          </label>
+        </div>
+        <div className="checkbox-div">
+          <label className="container-checkbox">
+            <input
+              className="my-checkbox"
+              type="checkbox"
+              checked={klubb}
+              onChange={() => setKlubb(!klubb)}
+            />
+            <span className="checkmark"></span>
+            Klubb
+          </label>
+        </div>
       </div>
       {renderLøperFields()}
       <p>
-        {allFieldsFilled
-          ? ""
-          : "Du må fylle alle feltene for å starte å sekundere"}
+        Du kan starte å sekundere når alle navn og tider er fylt
       </p>
       <div>
         <button
           className="legg-eller-fjern-løper-button"
           onClick={() => {
-            if (forFåLøpere) {
-              setForFåLøpere(false);
-            }
             setAntallLøpere(antallLøpere + 1);
           }}
         >
-          Legg til flere løpere
+          Legg til løpere
         </button>
         <button
           className="legg-eller-fjern-løper-button"
           onClick={() => {
             setAntallLøpere(antallLøpere - 1);
             if (antallLøpere === 2) {
-              setForFåLøpere(true);
               setAntallLøpere(2);
             }
           }}
         >
           Fjern løpere
         </button>
-        <p>Antall løpere: {antallLøpere}</p>
       </div>
       <div className="padding-bottom"></div>
     </div>

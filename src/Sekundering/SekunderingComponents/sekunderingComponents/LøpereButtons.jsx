@@ -109,7 +109,7 @@ function LøpereButtons({
             {visDiffTilLeder && (
               <>
                 <hr />
-                Diff til leder for neste passering
+                Tid til leder på neste passering
                 {(() => {
                   try {
                     if (dataForNedtelling["flestPasseringer"].includes(index)) {

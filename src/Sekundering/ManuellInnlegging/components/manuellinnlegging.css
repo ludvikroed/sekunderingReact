@@ -6,6 +6,8 @@
     cursor: pointer;
     margin: 5px;
     border-radius: 4px;
+    font-size: large;
+    margin-bottom: 70px;
 }
 
 .legg-eller-fjern-løper-button:hover {
@@ -33,5 +35,46 @@
     font-size: 18px;
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+.number-input {
+    font-size: 18px;
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    outline: none;
+}
+.number-input{
+    color: black;
+   border-radius: 5px;
+   border: none;
+}
+
+.td-select{
+    background-color: #3e8e41;
+}
+
+.td-select:hover {
+    background-color: #3e8e41;
+}
+
+.home-button {
+    display: inline-block;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    border: none;
+    width: 100%;
+    text-align: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.home-button:hover {
+    background-color: #2980b9;
+    border: none;
+    border-radius: 4px;
 }
 

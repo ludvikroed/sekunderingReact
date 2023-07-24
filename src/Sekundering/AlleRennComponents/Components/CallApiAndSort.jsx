@@ -9,7 +9,7 @@ export function CallApiAndSort(dag, sport, søk, isChecked) {
 
   const formatedFromDate = fromDate.toISOString().slice(0, 10);
   const formatedToDate = toDate.toISOString().slice(0, 10);
-  
+
   let date;
   if (isChecked) {
     date = formatedFromDate + "+00%3A00&dateTo=" + formatedToDate + "+23%3A59";
@@ -21,7 +21,7 @@ export function CallApiAndSort(dag, sport, søk, isChecked) {
     søk +
     "&dateFrom=" +
     date +
-"&organizationId=0&regionIds=&levelIds=&sportIds=&take=200&dateSort=true&desc=false&onlyValidated=true&onlyshowfororganizer=false&organizerIds=&graded=false";
+    "&organizationId=0&regionIds=&levelIds=&sportIds=&take=200&dateSort=true&desc=false&onlyValidated=true&onlyshowfororganizer=false&organizerIds=&graded=false";
   const urlLangrenn =
     "https://events.eqtiming.com/api/Events?query=" +
     søk +
@@ -39,15 +39,15 @@ export function CallApiAndSort(dag, sport, søk, isChecked) {
     søk +
     "&dateFrom=" +
     date +
-"&organizationId=0&regionIds=&levelIds=&sportIds=79%2C80%2C273%2C380%2C397%2C410%2C416%2C424%2C46%2C417%2C435%2C436%2C437%2C438%2C440%2C439%2C441%2C442%2C443%2C444%2C445%2C446%2C78%2C447&take=200&dateSort=true&desc=false&onlyValidated=true&onlyshowfororganizer=false&organizerIds=&graded=false";
-  
+    "&organizationId=0&regionIds=&levelIds=&sportIds=79%2C80%2C273%2C380%2C397%2C410%2C416%2C424%2C46%2C417%2C435%2C436%2C437%2C438%2C440%2C439%2C441%2C442%2C443%2C444%2C445%2C446%2C78%2C447&take=200&dateSort=true&desc=false&onlyValidated=true&onlyshowfororganizer=false&organizerIds=&graded=false";
+
   const urlSykling =
     "https://events.eqtiming.com/api/Events?query=" +
     søk +
     "&dateFrom=" +
     date +
-"&organizationId=0&regionIds=&levelIds=&sportIds=381%2C395%2C425%2C64%2C65%2C66%2C67%2C68%2C69%2C70%2C427%2C428%2C429%2C448&take=200&dateSort=true&desc=false&onlyValidated=true&onlyshowfororganizer=false&organizerIds=&graded=false";
-  
+    "&organizationId=0&regionIds=&levelIds=&sportIds=381%2C395%2C425%2C64%2C65%2C66%2C67%2C68%2C69%2C70%2C427%2C428%2C429%2C448&take=200&dateSort=true&desc=false&onlyValidated=true&onlyshowfororganizer=false&organizerIds=&graded=false";
+
   const urlMultisport =
     "https://events.eqtiming.com/api/Events?query=" +
     søk +
@@ -71,7 +71,6 @@ export function CallApiAndSort(dag, sport, søk, isChecked) {
     Orientering: urlOrientering,
   };
 
-  
   return axios
     .get("https://appapi.sekundering.repl.co", {
       params: {
@@ -97,8 +96,6 @@ export function CallApiAndSort(dag, sport, søk, isChecked) {
     })
     .catch((error) => {
       console.error(error);
-      return "error"
+      return "error";
     });
 }
-
-

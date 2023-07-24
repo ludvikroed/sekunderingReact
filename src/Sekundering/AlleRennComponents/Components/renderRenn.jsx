@@ -52,11 +52,11 @@ function RenderRenn({ renn, dag, isCheckedSøk, isChecked }) {
 
   let padding;
   if (isCheckedSøk && isChecked) {
-    padding = "350px";
+    padding = "380px";
   } else if (isCheckedSøk) {
-    padding = "260px";
+    padding = "290px";
   } else {
-    padding = "120px";
+    padding = "150px";
   }
 
   return (

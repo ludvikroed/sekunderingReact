@@ -7,6 +7,7 @@ import StartSekunderingButton from "./Components/StartSekundering";
 import Loading from "../AlleRennComponents/Components/Loading";
 import HvisData from "./Components/HvisData";
 import Søk from "./Components/Søk";
+import HomeBanner from "../AlleRennComponents/Components/homeBanner";
 
 function Startliste() {
   const { id } = useParams();
@@ -150,6 +151,7 @@ function Startliste() {
 
   return (
     <div className="alle-startliste">
+      <HomeBanner />
       <HvisData
         hvisStarttider={hvisStarttider}
         hvisStartnummer={hvisStartnummer}

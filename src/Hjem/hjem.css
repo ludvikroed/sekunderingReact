@@ -41,3 +41,34 @@ header {
     display: block;
         text-align: center;
 }
+
+footer {
+    background-color: #222;
+    left: 0;
+    bottom: 0;
+    color: #fff;
+    padding: 20px;
+    padding-left: 0px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+}
+
+.footer {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer:hover {
+    text-decoration: underline;
+}
+
+
+.beskrivelse{
+    background-color: rgb(38, 35, 35);
+    margin: 10px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+}

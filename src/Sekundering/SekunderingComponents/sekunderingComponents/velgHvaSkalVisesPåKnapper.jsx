@@ -114,7 +114,7 @@ function VelgHvaSkalVisesPåKnapper({ showDropdown, setShowDropdown }) {
                   onChange={visDiffTilLederFunc}
                 />
                 <span className="checkmark"></span>
-                Vis diff til leder på neste passering
+                Vis tid til leder på neste passering
               </label>
             </div>
             <div className="checkbox-div">

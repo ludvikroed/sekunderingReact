@@ -7,6 +7,7 @@ import Loading from "./Components/Loading";
 import Helmet from "react-helmet";
 
 import Søk from "./Components/Søk";
+import HomeBanner from "./Components/homeBanner";
 import "./spinner.css";
 import "./søk.css";
 import "./søke-knapper.css";
@@ -30,7 +31,6 @@ const AlleRenn = () => {
     let ny = lastNyeRenn + 1;
     setLastNyeRenn(ny);
   };
-
   useEffect(() => {
     setIsLoading(true);
     CallApiAndSort(dag, sport, søk, isChecked)
@@ -67,10 +67,11 @@ const AlleRenn = () => {
           name="keywords"
           content="Sekundering, Sekunderings App, Sekunderingsprogram, Sekundering med EQtiming, Manuell sekundering"
         />
-        <link rel="canonical" href="https://www.sekundering.no/renn" />
+        <link rel="canonical" href="https://sekundering.no/renn" />
       </Helmet>
       <header>
         <div className="alle-søke-oppsjoner">
+          <HomeBanner />
           <SportSelecter sport={sport} setSport={setSport} />
           <hr />
           <div className="søke-knapper">
