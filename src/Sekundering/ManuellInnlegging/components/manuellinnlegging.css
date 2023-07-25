@@ -78,3 +78,11 @@
     border-radius: 4px;
 }
 
+
+.manuell-overskrift{
+    background-color: #3e8e41;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0px;
+    margin-top: 5px;
+}

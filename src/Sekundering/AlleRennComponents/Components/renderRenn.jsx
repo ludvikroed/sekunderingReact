@@ -50,17 +50,8 @@ function RenderRenn({ renn, dag, isCheckedSøk, isChecked }) {
       );
     });
 
-  let padding;
-  if (isCheckedSøk && isChecked) {
-    padding = "380px";
-  } else if (isCheckedSøk) {
-    padding = "290px";
-  } else {
-    padding = "150px";
-  }
-
   return (
-    <div className="render-renn" style={{ paddingTop: padding }}>
+    <div className="render-renn" >
       {items}
     </div>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import "./hjem.css";
+import Logo from "./logo";
 
 function Hjem() {
   return (
@@ -19,6 +20,7 @@ function Hjem() {
         <link rel="canonical" href="https://www.sekundering.no" />
       </Helmet>
       <header>
+        <Logo/>
         <h1 className="header-hjem">SEKUNDERING</h1>
         <h2>Hvordan vil du velge utøvere</h2>
       </header>

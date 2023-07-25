@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./checbox.css";
 
 function LøpereListe({
@@ -42,9 +42,8 @@ function LøpereListe({
   return (
     <div>
       <p>Viser klasse: {selectedKlasse}</p>
-      <hr />
       {filteredLøpere.map((data, index) => (
-        <div key={index}>
+        <div className="løper" key={index}>
           <label className="container-names">
             <input
               type="checkbox"
@@ -59,12 +58,10 @@ function LøpereListe({
             {`${data["@fornavn"]} ${data["@etternavn"]}`}
             <span className="checkmark-names"></span>
           </label>
-          <hr />
           {hvisStarttider && <p>Starttid: {data["@starttid"]}</p>}
           {hvisStartnummer && <p>Startnummer: {data["@startno"]}</p>}
           {hvisKlubb && <p>Klubb: {data["@team"]}</p>}
           {hvisKlasse && <p>Klasse: {data["@klasse"]}</p>}
-          <hr />
         </div>
       ))}
     </div>

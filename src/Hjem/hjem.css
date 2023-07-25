@@ -10,7 +10,7 @@
 .link-button {
     display: inline-block;
     padding: 10px 20px;
-    background: #333;
+    background: #0066d3;
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -20,7 +20,7 @@
 }
 
 .link-button:hover {
-    background: #555;
+    background: #0056b3;
 }
 
 
@@ -42,28 +42,6 @@ header {
         text-align: center;
 }
 
-footer {
-    background-color: #222;
-    left: 0;
-    bottom: 0;
-    color: #fff;
-    padding: 20px;
-    padding-left: 0px;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-}
-
-.footer {
-    color: #fff;
-    text-decoration: none;
-}
-
-.footer:hover {
-    text-decoration: underline;
-}
-
-
 .beskrivelse{
     background-color: rgb(38, 35, 35);
     margin: 10px;
@@ -71,4 +49,10 @@ footer {
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 10px;
+}
+
+.alle-renn{
+    border: 5px solid white;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

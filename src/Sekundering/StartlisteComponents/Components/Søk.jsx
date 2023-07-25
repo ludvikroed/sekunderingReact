@@ -3,10 +3,10 @@ const Søk = ({ searchQuery, setSearchQuery }) => {
     setSearchQuery(event.target.value);
   };
   return (
-    <>
+    <div className="søk-løpere">
       <h2>Søk på løpere</h2>
-      <input type="text" value={searchQuery} onChange={handleSearch} />
-    </>
+      <input placeholder="Navn" type="text" value={searchQuery} onChange={handleSearch} />
+    </div>
   );
 };
 

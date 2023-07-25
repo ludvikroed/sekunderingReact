@@ -7,7 +7,9 @@ import StartSekunderingButton from "./Components/StartSekundering";
 import Loading from "../AlleRennComponents/Components/Loading";
 import HvisData from "./Components/HvisData";
 import Søk from "./Components/Søk";
-import HomeBanner from "../AlleRennComponents/Components/homeBanner";
+import Logo from "../../Hjem/logo";
+
+import "./startliste.css"
 
 function Startliste() {
   const { id } = useParams();
@@ -151,42 +153,47 @@ function Startliste() {
 
   return (
     <div className="alle-startliste">
-      <HomeBanner />
-      <HvisData
-        hvisStarttider={hvisStarttider}
-        hvisStartnummer={hvisStartnummer}
-        hvisKlasse={hvisKlasse}
-        hvisKlubb={hvisKlubb}
-        setHvisStarttider={setHvisStarttider}
-        setHvisStartnummer={setHvisStartnummer}
-        setHvisKlasse={setHvisKlasse}
-        setHvisKlubb={setHvisKlubb}
-      />
-      <Klasser
-        klasser={klasser}
-        handleKlasseClick={handleKlasseClick}
-        selectedKlasse={selectedKlasse}
-        checkedCheckboxes={checkedCheckboxes}
-        handleCheckboxChange={handleCheckboxChange}
-      />
-      <Søk searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <LøpereListe
-        hvisStarttider={hvisStarttider}
-        hvisStartnummer={hvisStartnummer}
-        hvisKlasse={hvisKlasse}
-        hvisKlubb={hvisKlubb}
-        groupedData={groupedData}
-        selectedKlasse={selectedKlasse}
-        checkedCheckboxes={checkedCheckboxes[selectedKlasse]}
-        handleCheckboxChange={(index) =>
-          handleCheckboxChange(selectedKlasse, index)
-        }
-        checkedLøpere={checkedLøpere}
-        setCheckedLøpere={setCheckedLøpere}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
-      <StartSekunderingButton checkedLøpere={checkedLøpere} />
+      <header>
+        <Logo />
+        <h1>Startliste</h1>
+        <HvisData
+          hvisStarttider={hvisStarttider}
+          hvisStartnummer={hvisStartnummer}
+          hvisKlasse={hvisKlasse}
+          hvisKlubb={hvisKlubb}
+          setHvisStarttider={setHvisStarttider}
+          setHvisStartnummer={setHvisStartnummer}
+          setHvisKlasse={setHvisKlasse}
+          setHvisKlubb={setHvisKlubb}
+        />
+        <Klasser
+          klasser={klasser}
+          handleKlasseClick={handleKlasseClick}
+          selectedKlasse={selectedKlasse}
+          checkedCheckboxes={checkedCheckboxes}
+          handleCheckboxChange={handleCheckboxChange}
+        />
+        <Søk searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      </header>
+      <main>
+        <LøpereListe
+          hvisStarttider={hvisStarttider}
+          hvisStartnummer={hvisStartnummer}
+          hvisKlasse={hvisKlasse}
+          hvisKlubb={hvisKlubb}
+          groupedData={groupedData}
+          selectedKlasse={selectedKlasse}
+          checkedCheckboxes={checkedCheckboxes[selectedKlasse]}
+          handleCheckboxChange={(index) =>
+            handleCheckboxChange(selectedKlasse, index)
+          }
+          checkedLøpere={checkedLøpere}
+          setCheckedLøpere={setCheckedLøpere}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+        <StartSekunderingButton checkedLøpere={checkedLøpere} />
+      </main>
     </div>
   );
 }

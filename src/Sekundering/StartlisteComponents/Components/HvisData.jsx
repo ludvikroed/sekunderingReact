@@ -12,8 +12,8 @@ const HvisData = ({
 }) => {
   return (
     <div>
-      <h3>Velg hva som vises på knapper</h3>
-      <div className="dropdown-content">
+      <div className="konteiner-startliste">
+        <h3>Velg hva som vises på knapper:</h3>
         <hr />
         <label className="container-names">
           <input
@@ -62,7 +62,6 @@ const HvisData = ({
           Vis starttider
           <span className="checkmark-names"></span>
         </label>
-        <hr />
       </div>
     </div>
   );

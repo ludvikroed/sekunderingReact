@@ -1,0 +1,19 @@
+
+.logo-div {
+    background: linear-gradient(to right, #6495ED, #87CEEB);    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    border-bottom-left-radius: 10px;
+    border-radius: 10px;
+}
+
+.logo-div h2 {
+    font-size: 1.5rem;
+}
+
+.logo-div img {
+    width: 60px;
+    height: auto;
+}

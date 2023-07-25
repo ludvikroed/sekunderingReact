@@ -1,16 +1,17 @@
-import DateSelecter from "./Components/DateSelcter";
 import React, { useState, useEffect } from "react";
-import SportSelecter from "./Components/SportSelecter";
-import RenderRenn from "./Components/renderRenn";
 import { CallApiAndSort } from "./Components/CallApiAndSort";
+import SportSelecter from "./Components/SportSelecter";
+import DateSelecter from "./Components/DateSelcter";
+import RenderRenn from "./Components/renderRenn";
 import Loading from "./Components/Loading";
 import Helmet from "react-helmet";
-
+import Logo from "../../Hjem/logo";
 import Søk from "./Components/Søk";
-import HomeBanner from "./Components/homeBanner";
+
+import "./søke-knapper.css";
+import "./alleRenn.css";
 import "./spinner.css";
 import "./søk.css";
-import "./søke-knapper.css";
 
 const AlleRenn = () => {
   const [dag, setDag] = useState(new Date());
@@ -71,7 +72,9 @@ const AlleRenn = () => {
       </Helmet>
       <header>
         <div className="alle-søke-oppsjoner">
-          <HomeBanner />
+          <div className="logo-container">
+            <Logo />
+          </div>
           <SportSelecter sport={sport} setSport={setSport} />
           <hr />
           <div className="søke-knapper">

@@ -1,6 +1,4 @@
 .alle-søke-oppsjoner {
-  position: fixed;
-  top: 0;
   width: 100%;
   z-index: 999;
   display: block;
@@ -11,8 +9,11 @@
 .alle-renn-scroller {
   display: block;
   color: green;
+  height: 500px;
+  overflow: auto;
 }
 
 .søk-renn{
   margin-bottom: 10px;
 }
+

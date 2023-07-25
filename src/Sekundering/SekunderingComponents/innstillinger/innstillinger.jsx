@@ -1,6 +1,7 @@
 import React from "react";
 import FjernPasseringer from "./components/FjernPasseringer";
 import Tabs from "../tabs/Tabs";
+import Logo from "../../../Hjem/logo";
 
 const Innstillinger = () => {
   function resetData() {
@@ -12,6 +13,7 @@ const Innstillinger = () => {
   return (
     <>
       <header>
+        <Logo />
         <Tabs />
       </header>
       <main>

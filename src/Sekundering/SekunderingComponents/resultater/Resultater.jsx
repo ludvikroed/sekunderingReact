@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Resultater.css";
 import Tabs from "../tabs/Tabs";
+import Logo from "../../../Hjem/logo";
 
 const Resultater = () => {
   const storedData = sessionStorage.getItem("løpereData");
@@ -26,13 +27,12 @@ const Resultater = () => {
   }
   const editedPasseringerLøpereList = passeringerLøpereList.map(
     (data, index) => {
-
       const startTid = data[1]["startTidSekunder"];
       const endraTider = data[0].map((data) => {
         const tidSidenMidnatt = parseFloat(data);
         return tidSidenMidnatt - startTid;
       });
-      return [endraTider, data[1]]
+      return [endraTider, data[1]];
     }
   );
 
@@ -83,6 +83,7 @@ const Resultater = () => {
     return (
       <>
         <header>
+          <Logo />
           <Tabs />
         </header>
         <main>
@@ -99,20 +100,17 @@ const Resultater = () => {
 
     const formattedMinutes = String(minutes).padStart(2, "0");
     const formattedSeconds = String(secondsOneDecimal).padStart(2, "0");
-    if (seconds < 61){
-      return formattedSeconds
-    }else{
-    return `${formattedMinutes}:${formattedSeconds}`;
-
+    if (seconds < 61) {
+      return formattedSeconds;
+    } else {
+      return `${formattedMinutes}:${formattedSeconds}`;
     }
-    
-
   }
-
 
   return (
     <>
       <header>
+        <Logo />
         <Tabs />
       </header>
       <main>
@@ -180,9 +178,7 @@ const Resultater = () => {
                         <tr key={index2}>
                           <td>{index2 + 1}</td>
                           <td>{data[1].navn}</td>
-                          <td>
-                            {formatTime((data[0] - passering[0][0]))}
-                          </td>
+                          <td>{formatTime(data[0] - passering[0][0])}</td>
                           {showStartnummer && <td>{data[1].startNummer}</td>}
                           {showKlubb && <td>{data[1].klubb}</td>}
                           {showKlasse && <td>{data[1].klasse}</td>}
