@@ -1,0 +1,55 @@
+.konteiner-startliste {
+    background-color: #0288D1;
+    /* Darker Blue */
+    margin: 5px;
+    padding: 10px;
+    border: solid #FFFFFF 4px;
+    /* White */
+    border-radius: 5px;
+    padding-bottom: 0;
+}
+
+.søk-løpere {
+    background-color: #0288D1;
+    /* Darker Blue */
+    margin: 5px;
+    padding: 10px;
+    padding-top: 3px;
+    border: solid #FFFFFF 4px;
+    /* White */
+    border-radius: 5px;
+    padding-right: 15px;
+    line-height: 2;
+}
+
+.løper {
+    padding-top: 100px;
+    background-color: #1976D2;
+    /* Dark Blue */
+    margin: 5px;
+    padding: 10px;
+    padding-top: 0;
+    border: solid #FFFFFF 4px;
+    /* White */
+    border-radius: 5px;
+    padding-bottom: 0;
+}
+
+.løper label {
+    margin-top: 10px;
+}
+
+.klasser-container {
+    background-color: #0288D1;
+    /* Darker Blue */
+    margin: 5px;
+    padding: 10px;
+    border: solid #FFFFFF 4px;
+    /* White */
+    border-radius: 5px;
+}
+
+.alle-startliste {
+    padding-left: 10px;
+    padding-right: 10px;
+}

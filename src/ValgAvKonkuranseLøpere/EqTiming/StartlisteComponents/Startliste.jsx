@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Helmet from "react-helmet";
 import axios from "axios";
-import Klasser from "./Components/Klasser";
-import LøpereListe from "./Components/LøpereListe";
+
 import StartSekunderingButton from "./Components/StartSekundering";
-import Loading from "../AlleRennComponents/Components/Loading";
+import LøpereListe from "./Components/LøpereListe";
 import HvisData from "./Components/HvisData";
+import Loading from "../AlleRennComponents/Components/Loading";
+import Klasser from "./Components/Klasser";
+import Logo from "../../../Diverse/logo";
 import Søk from "./Components/Søk";
-import Logo from "../../Hjem/logo";
+
+
 
 import "./startliste.css"
 
@@ -20,6 +24,8 @@ function Startliste() {
   const [searchQuery, setSearchQuery] = useState("");
   const [laster, setLaster] = useState(true);
   const [error, setError] = useState(false);
+  const [visOpsjoner, setVisOptioner] = useState(false); 
+
   const [hvisStarttider, setHvisStarttider] = useState(() => {
     const starttiderJson = localStorage.getItem("visStarttiderStartliste");
     if (starttiderJson) {
@@ -101,8 +107,14 @@ function Startliste() {
   if (error) {
     return (
       <div>
-        Det ser ut til at noe er feil. Dette kan skje av flere grunner. Det mest
-        sansynlige er at nettsiden ikke får tilgang til dataen fra EQtiming
+        <header>
+          <Logo/>
+        </header>
+        <main>
+          Det ser ut til at noe er feil. Dette kan skje av flere grunner. Det
+          mest sansynlige er at nettsiden ikke får tilgang til dataen fra
+          EQtiming
+        </main>
       </div>
     );
   }
@@ -151,29 +163,44 @@ function Startliste() {
     return groups;
   }, {});
 
+
+
   return (
     <div className="alle-startliste">
+      <Helmet>
+        <title>Startliste</title>
+        <meta
+          name="description"
+          content="Velg utdøvere fra EQ Timing "
+        />
+        <meta
+          name="keywords"
+          content="Sekundering, Konkuransser fra EQ Timing, Sekunderings App, Sekunderingsprogram, Sekundering med EQtiming, Manuell sekundering"
+        />
+      </Helmet>
       <header>
-        <Logo />
-        <h1>Startliste</h1>
-        <HvisData
-          hvisStarttider={hvisStarttider}
-          hvisStartnummer={hvisStartnummer}
-          hvisKlasse={hvisKlasse}
-          hvisKlubb={hvisKlubb}
-          setHvisStarttider={setHvisStarttider}
-          setHvisStartnummer={setHvisStartnummer}
-          setHvisKlasse={setHvisKlasse}
-          setHvisKlubb={setHvisKlubb}
-        />
-        <Klasser
-          klasser={klasser}
-          handleKlasseClick={handleKlasseClick}
-          selectedKlasse={selectedKlasse}
-          checkedCheckboxes={checkedCheckboxes}
-          handleCheckboxChange={handleCheckboxChange}
-        />
-        <Søk searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <div className="startliste-topp">
+          <Logo />
+          <h1>Startliste</h1>
+          <HvisData
+            hvisStarttider={hvisStarttider}
+            hvisStartnummer={hvisStartnummer}
+            hvisKlasse={hvisKlasse}
+            hvisKlubb={hvisKlubb}
+            setHvisStarttider={setHvisStarttider}
+            setHvisStartnummer={setHvisStartnummer}
+            setHvisKlasse={setHvisKlasse}
+            setHvisKlubb={setHvisKlubb}
+          />
+          <Klasser
+            klasser={klasser}
+            handleKlasseClick={handleKlasseClick}
+            selectedKlasse={selectedKlasse}
+            checkedCheckboxes={checkedCheckboxes}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+          <Søk searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        </div>
       </header>
       <main>
         <LøpereListe

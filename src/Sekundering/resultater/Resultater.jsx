@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Resultater.css";
 import Tabs from "../tabs/Tabs";
-import Logo from "../../../Hjem/logo";
+import Logo from "../../Diverse/logo";
 
 const Resultater = () => {
   const storedData = sessionStorage.getItem("løpereData");

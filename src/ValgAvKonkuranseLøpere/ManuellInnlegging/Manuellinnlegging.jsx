@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import ImputText from "./components/ImputText";
 import StartSekunderingButton from "./components/StartSekunderingButton";
-import { useNavigate } from "react-router-dom";
-import Logo from "../../Hjem/logo";
+import Logo from "../../Diverse/logo";
 
 function ManuellInnlegging() {
   const [løperData, setLøperData] = useState([]);

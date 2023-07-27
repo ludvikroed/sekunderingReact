@@ -1,4 +1,4 @@
-import logoIMG from "./logo.png";
+import logo from "./logo.svg";
 import "./logo.css";
 import { useNavigate } from "react-router-dom";
 
@@ -11,8 +11,8 @@ export default function Logo() {
 
   return (
     <div className="logo-div">
-      <img src={logoIMG} alt="" onClick={handleClick} />
-      <h2 onClick={handleClick}>SEKUNDERING</h2>
+      <img src={logo} alt="" onClick={handleClick} />
+      <h2 onClick={handleClick}>Sekundering.no</h2>
     </div>
   );
 }

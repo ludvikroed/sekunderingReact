@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import AlleRenn from "./Sekundering/AlleRennComponents/AlleRenn.jsx";
-import Startliste from "./Sekundering/StartlisteComponents/Startliste";
-import Sekundering from "./Sekundering/SekunderingComponents/Sekundering.jsx";
-import Innstillinger from "./Sekundering/SekunderingComponents/innstillinger/innstillinger.jsx";
-import Resultater from "./Sekundering/SekunderingComponents/resultater/Resultater.jsx";
+import ManuellInnlegging from "./ValgAvKonkuranseLøpere/ManuellInnlegging/Manuellinnlegging.jsx";
+import StartlisteRitt from "./ValgAvKonkuranseLøpere/RittResultater/ritt/startlisteRitt/startlisteRitt.jsx";
+import Innstillinger from "./Sekundering/innstillinger/innstillinger.jsx";
+import Sekundering from "./Sekundering/Sekundering.jsx";
+import Startliste from "./ValgAvKonkuranseLøpere/EqTiming/StartlisteComponents/Startliste";
+import Resultater from "./Sekundering/resultater/Resultater.jsx"
+import AlleRitt from "./ValgAvKonkuranseLøpere/RittResultater/ritt/AlleRittComponents/AlleRitt.jsx";
+import AlleRenn from "./ValgAvKonkuranseLøpere/EqTiming/AlleRennComponents/AlleRenn.jsx";
+import Redirect from "./Diverse/Redirect.jsx";
+import Logo from "./Diverse/logo.jsx";
 import Hjem from "./Hjem/Hjem.jsx";
-import ManuellInnlegging from "./Sekundering/ManuellInnlegging/Manuellinnlegging.jsx";
-import AlleRitt from "./Sekundering/ritt/AlleRittComponents/AlleRitt.jsx";
-import StartlisteRitt from "./Sekundering/ritt/startlisteRitt/startlisteRitt.jsx";
-import Redirect from "./Redirect.jsx";
+
+
 
 const App = () => {
   return (
@@ -21,8 +24,11 @@ const App = () => {
           path="*"
           element={
             <>
+              <Logo />
               <h1>404 Not Found</h1>
-              <p>Siden du leter etter finnes ikke ellers har det skjedd en feil</p>
+              <p>
+                Siden du leter etter finnes ikke ellers har det skjedd en feil
+              </p>
             </>
           }
         />

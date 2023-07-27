@@ -6,8 +6,8 @@ const Redirect = () => {
     const hasWWW = currentUrl.includes("www");
     const isLocalhost = currentUrl.includes("localhost");
 
-    if (hasWWW && !isLocalhost) {
-      const newUrl = currentUrl.replace("//www", "//");
+    if (!hasWWW && !isLocalhost) {
+      const newUrl = currentUrl.replace("//", "//www.");
       window.location.href = newUrl;
     }
   }, []);

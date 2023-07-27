@@ -105,13 +105,6 @@
   top: 0;
 }
 
-.top-section {
-  flex-grow: 1;
-  overflow: auto; /* Enable scrolling in the top section */
-  max-height: calc(100% - 20px); /* Subtract the height of the resizer from the available space */
-}
-
-
 .resizable-div {
     width: 100%;
     background-color: white;
@@ -130,15 +123,19 @@
     left: 0;
     width: 100%;
     overflow: auto;
+    overflow-x: hidden;
 }
 
 .constent-in-top-div {
     background-color: black;
     overflow: auto;
+    overflow-x: hidden;
 }
 
 .hele {
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
 }
 
 .button-vis-passering{

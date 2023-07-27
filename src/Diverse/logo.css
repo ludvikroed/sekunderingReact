@@ -11,9 +11,11 @@
 
 .logo-div h2 {
     font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .logo-div img {
     width: 60px;
     height: auto;
+    cursor: pointer;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import "./hjem.css";
-import Logo from "./logo";
+import Logo from "../Diverse/logo";
 
 function Hjem() {
   return (
@@ -15,12 +15,12 @@ function Hjem() {
         />
         <meta
           name="keywords"
-          content="Sekundering, Sekunderings App, Sekunderingsprogram, Sekundering med EQtiming, Manuell sekundering"
+          content="Sekundering, Sekunderingsverktøy, Sekunderings App, Sekunderingsprogram, Sekundering med EQtiming, Manuell sekundering"
         />
         <link rel="canonical" href="https://www.sekundering.no" />
       </Helmet>
       <header>
-        <Logo/>
+        <Logo />
         <h1 className="header-hjem">SEKUNDERING</h1>
         <h2>Hvordan vil du velge utøvere</h2>
       </header>

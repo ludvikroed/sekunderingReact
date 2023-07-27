@@ -5,10 +5,9 @@ import DateSelecter from "./Components/DateSelcter";
 import RenderRenn from "./Components/renderRenn";
 import Loading from "./Components/Loading";
 import Helmet from "react-helmet";
-import Logo from "../../Hjem/logo";
+import Logo from "../../../Diverse/logo";
 import Søk from "./Components/Søk";
 
-import "./søke-knapper.css";
 import "./alleRenn.css";
 import "./spinner.css";
 import "./søk.css";
@@ -23,6 +22,20 @@ const AlleRenn = () => {
   const [isCheckedSøk, setIsCheckedSøk] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, serError] = useState(false);
+  const [margin, setMargin] = useState("230px");
+
+  useEffect(() => {
+    if (isCheckedSøk) {
+      if (isChecked){
+        setMargin("460px")
+      }else{
+        setMargin("370px");
+      }
+      
+    } else {
+      setMargin("230px");
+    }
+  }, [isChecked, isCheckedSøk]);
 
   function handleChangeSøk() {
     setIsCheckedSøk(!isCheckedSøk);
@@ -50,6 +63,7 @@ const AlleRenn = () => {
         serError(true);
       });
   }, [lastNyeRenn]);
+
   if (error) {
     return (
       <div>
@@ -63,17 +77,18 @@ const AlleRenn = () => {
     <>
       <Helmet>
         <title>konkurranser EQtiming</title>
-        <meta name="description" content="konkurranser fra EQtiming" />
+        <meta name="description" content="Velg en konkurranser fra EQtiming og start å sekundere utdøvere fra startlister" />
         <meta
           name="keywords"
-          content="Sekundering, Sekunderings App, Sekunderingsprogram, Sekundering med EQtiming, Manuell sekundering"
+          content="Sekundering, Konkuransser fra Eq timing, Sekunderings App, Sekunderingsprogram, Sekundering med EQtiming, Manuell sekundering"
         />
-        <link rel="canonical" href="https://sekundering.no/renn" />
+        <link rel="canonical" href="https://www.sekundering.no/renn" />
       </Helmet>
       <header>
         <div className="alle-søke-oppsjoner">
           <div className="logo-container">
             <Logo />
+            <hr />
           </div>
           <SportSelecter sport={sport} setSport={setSport} />
           <hr />
@@ -113,7 +128,7 @@ const AlleRenn = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          <div className="alle-renn-scroller">
+          <div className="alle-renn-scroller" style={{ marginTop: margin }}>
             <RenderRenn
               renn={renn}
               dag={dag}
