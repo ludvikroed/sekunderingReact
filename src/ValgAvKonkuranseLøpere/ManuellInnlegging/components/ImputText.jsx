@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./manuellinnlegging.css";
 import TimeInputWithSeconds from "./timeInput";
 
-function InputText({ løperData, setLøperData, alleFeltFylt, setAlleFeltFylt }) {
+function InputText({ løperData, setLøperData, setAlleFeltFylt }) {
   const [antallLøpere, setAntallLøpere] = useState(2);
   const [startnummer, setStartnummer] = useState(false);
   const [klasse, setKlasse] = useState(false);
@@ -97,7 +97,9 @@ function InputText({ løperData, setLøperData, alleFeltFylt, setAlleFeltFylt })
     } catch (error) {}
     setAlleFeltFylt(fylt);
   };
-  erAlleFeltFylt();
+  useEffect(() => {
+    erAlleFeltFylt();
+  }, [hvilkeFeltFylt]);
 
   const renderLøperFields = () => {
     const løperFields = [];
@@ -122,7 +124,7 @@ function InputText({ løperData, setLøperData, alleFeltFylt, setAlleFeltFylt })
           />
           <div className="starttid">
             <TimeInputWithSeconds
-              index={i}
+              i={i}
               løperData={løperData}
               setLøperData={setLøperData}
             />

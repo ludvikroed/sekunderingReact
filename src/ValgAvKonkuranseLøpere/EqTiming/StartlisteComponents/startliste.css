@@ -1,6 +1,6 @@
 .konteiner-startliste {
-    background-color: #0288D1;
-    /* Darker Blue */
+    background: linear-gradient(135deg, #0288D1, #03A9F4);
+    /* Blue Gradient */
     margin: 5px;
     padding: 10px;
     border: solid #FFFFFF 4px;
@@ -10,8 +10,8 @@
 }
 
 .søk-løpere {
-    background-color: #0288D1;
-    /* Darker Blue */
+    background: linear-gradient(135deg, #0288D1, #03A9F4);
+    /* Blue Gradient */
     margin: 5px;
     padding: 10px;
     padding-top: 3px;
@@ -40,8 +40,8 @@
 }
 
 .klasser-container {
-    background-color: #0288D1;
-    /* Darker Blue */
+    background: linear-gradient(135deg, #0288D1, #03A9F4);
+    /* Blue Gradient */
     margin: 5px;
     padding: 10px;
     border: solid #FFFFFF 4px;

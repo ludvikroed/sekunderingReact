@@ -8,7 +8,7 @@ import LøpereListe from "./Components/LøpereListe";
 import HvisData from "./Components/HvisData";
 import Loading from "../AlleRennComponents/Components/Loading";
 import Klasser from "./Components/Klasser";
-import Logo from "../../../Diverse/logo";
+import Logo from "../../../Diverse/Logo/logo";
 import Søk from "./Components/Søk";
 
 

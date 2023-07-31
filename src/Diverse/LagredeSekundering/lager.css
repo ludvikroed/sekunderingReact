@@ -1,0 +1,78 @@
+/* lager.css */
+.lager-header {
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
+}
+
+.lager-title {
+    color: #fff;
+}
+
+.lager-subtitle {
+    color: #ccc;
+}
+
+.lager-main {
+    padding: 20px;
+}
+
+.lagret-sekundering-div {
+    background-color: #444;
+    border: 1px solid #666;
+    padding: 10px;
+    margin-bottom: 20px;border-radius: 5px;
+}
+
+.sekundering-number {
+    color: #fff;
+}
+
+.dato-lagd {
+    color: #ccc;
+}
+
+.lopere-text {
+    color: #fff;
+}
+
+.lopere-list {
+    margin-top: 10px;
+}
+
+.loper-name {
+    color: #ccc;
+    margin-bottom: 5px;
+}
+
+.lager-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* lager.css */
+.lagret-sekundering-div {
+    position: relative;
+    background-color: #444;
+    border: 1px solid #666;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.slett-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Add any other specific styles you want for different elements */

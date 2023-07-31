@@ -1,7 +1,7 @@
 import React from "react";
 import FjernPasseringer from "./components/FjernPasseringer";
 import Tabs from "../tabs/Tabs";
-import Logo from "../../Diverse/logo";
+import Logo from "../../Diverse/Logo/logo";
 
 const Innstillinger = () => {
   function resetData() {

@@ -33,6 +33,7 @@ function StartSekunderingButton({ løperData, alleFeltFylt }) {
       { antallLøpere: nyLøpereData.length, løpere: nyLøpereData },
       "Manuell",
     ];
+    console.log(nyLøpereData)
 
     navigate("/sekundering/", {
       state: allData,

@@ -10,8 +10,10 @@ import Resultater from "./Sekundering/resultater/Resultater.jsx"
 import AlleRitt from "./ValgAvKonkuranseLøpere/RittResultater/ritt/AlleRittComponents/AlleRitt.jsx";
 import AlleRenn from "./ValgAvKonkuranseLøpere/EqTiming/AlleRennComponents/AlleRenn.jsx";
 import Redirect from "./Diverse/Redirect.jsx";
-import Logo from "./Diverse/logo.jsx";
-import Hjem from "./Hjem/Hjem.jsx";
+import Lager from "./Diverse/LagredeSekundering/Lager.jsx";
+import Logo from "./Diverse/Logo/logo.jsx";
+import Hjem from "./Diverse/Hjem/Hjem.jsx";
+
 
 
 
@@ -33,6 +35,8 @@ const App = () => {
           }
         />
         <Route path="/" element={<Hjem />} />
+        <Route path="/lager" element={<Lager />} />
+
         <Route path="/manuell" element={<ManuellInnlegging />} />
         <Route path="/renn" element={<AlleRenn />} />
         <Route path="/renn/startliste/:id" element={<Startliste />} />

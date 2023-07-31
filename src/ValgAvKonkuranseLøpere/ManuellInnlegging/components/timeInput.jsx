@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-function TimeInputWithSeconds({ løperData, setLøperData, index }) {
+function TimeInputWithSeconds({ løperData, setLøperData, i }) {
   const [timer, setTimer] = useState(0);
   const [minutter, setMinutter] = useState(0);
   const [sekunder, setSekunder] = useState(0);
 
-  const handleLøperInputChange = (index, field, value) => {
+  const handleLøperInputChange = (i, field, value) => {
     const updatedLøperData = { ...løperData };
-    updatedLøperData[index] = {
-      ...updatedLøperData[index],
+    updatedLøperData[i] = {
+      ...updatedLøperData[i],
       [field]: value,
     };
     setLøperData(updatedLøperData);
@@ -16,7 +16,7 @@ function TimeInputWithSeconds({ løperData, setLøperData, index }) {
 
   useEffect(() => {
     const nyStarttid = timer + ":" + minutter + ":" + sekunder;
-    handleLøperInputChange(index, "starttid", nyStarttid);
+    handleLøperInputChange(i, "starttid", nyStarttid);
   }, [timer, minutter, sekunder]);
 
   const handleChangeTimer = (event) => {

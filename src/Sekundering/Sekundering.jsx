@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { dataForSekunderingslagring } from "./sekunderingComponents/dataForSekunderingslagring";
 import { OnStart } from "./sekunderingComponents/OnStart";
 import SekunderingResize from "./sekunderingComponents/SekunderingResize";
 import Helmet from "react-helmet";
@@ -13,7 +14,7 @@ function Sekundering() {
       document.body.style.overflow = "";
     };
   }, []);
-  
+
   const [løpereData, setLøpereData] = useState(() => {
     const løpereJson = sessionStorage.getItem("løpereData");
     return løpereJson ? JSON.parse(løpereJson) : [];
@@ -25,6 +26,8 @@ function Sekundering() {
     const loadData = async () => {
       const data = location.state;
       const reruns = sessionStorage.getItem("reruns");
+      const lagreSekunderingTall = await dataForSekunderingslagring();
+      const currentDate = new Date();
 
       if (reruns) {
         const løpereDataLocalStorage = sessionStorage.getItem("løpereData");
@@ -45,6 +48,10 @@ function Sekundering() {
               JSON.stringify(functionData.løpere)
             );
             sessionStorage.setItem("reruns", JSON.stringify(true));
+            localStorage.setItem(
+              lagreSekunderingTall + "lagretSekundering",
+              JSON.stringify({ løpere: functionData.løpere, dato: currentDate })
+            );
           }
         } catch (error) {
           setLøpereData(data[0]["løpere"]);
@@ -57,6 +64,10 @@ function Sekundering() {
             JSON.stringify(data[0]["løpere"])
           );
           sessionStorage.setItem("reruns", JSON.stringify(true));
+          localStorage.setItem(
+            lagreSekunderingTall + "lagretSekundering",
+            JSON.stringify({ løpere: data[0]["løpere"], dato: currentDate })
+          );
         }
       }
 
@@ -69,11 +80,14 @@ function Sekundering() {
               <Link to="/">Trykk her for å gå til startsiden</Link>
             </div>
             <div>
-              <Link to="/renn"> Trykk her for å velge nye navn fra</Link>
+              <Link to="/renn">
+                {" "}
+                Trykk her for å velge nye navn fra EQTiming.
+              </Link>
             </div>
             <div>
               <Link to="/manuell">
-                EQTiming. Trykk her for å legge inn tider og navn manuelt
+                Trykk her for å legge inn tider og navn manuelt
               </Link>
             </div>
           </div>
@@ -83,7 +97,6 @@ function Sekundering() {
 
     loadData();
   }, [location.state]);
-  console.log(location);
 
   const [errorMessage, setErrorMessage] = useState("");
 

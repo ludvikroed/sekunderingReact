@@ -5,7 +5,7 @@ import DateSelecter from "./Components/DateSelcter";
 import RenderRenn from "./Components/renderRenn";
 import Loading from "./Components/Loading";
 import Helmet from "react-helmet";
-import Logo from "../../../Diverse/logo";
+import Logo from "../../../Diverse/Logo/logo";
 import Søk from "./Components/Søk";
 
 import "./alleRenn.css";
