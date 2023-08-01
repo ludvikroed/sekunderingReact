@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../Logo/logo";
+import { useNavigate, Link } from "react-router-dom";
 import Helmet from "react-helmet";
-import { getLagretData } from "./getLagretData";
-import { useNavigate } from "react-router-dom";
 import "./lager.css";
-import { Link } from "react-router-dom";
+import { getLagretData } from "./components/getLagretData";
+import VisResultater from "./components/visResultater";
+import VisStarttider from "./components/visStarttider";
+import Logo from "../Logo/logo";
+
 
 const Lager = () => {
   let navigate = useNavigate();
@@ -19,7 +21,7 @@ const Lager = () => {
     sessionStorage.clear();
     const løpereData = item["løpere"];
     const finalData = [
-      { antallLøperer: løpereData.length, løpere: løpereData },
+      { antallLøpere: løpereData.length, løpere: løpereData },
       "manuell",
     ];
     navigate("/sekundering/", {
@@ -27,17 +29,15 @@ const Lager = () => {
     });
   };
 
- const slettSekundering = (key) => {
-   localStorage.removeItem(key);
-   setData((prevData) => prevData.filter((item) => item["key"] !== key));
- };
+  const slettSekundering = (key) => {
+    localStorage.removeItem(key);
+    setData((prevData) => prevData.filter((item) => item["key"] !== key));
+  };
 
   return (
     <>
       <Helmet>
-        <title>
-          Sekundering.no - Finn tidligere sekunderinger
-        </title>
+        <title>Sekundering.no - Finn tidligere sekunderinger</title>
         <meta
           name="description"
           content="Oppdag konkurranser på EQtiming, velg utøvere innen ulike idretter, sekunder utøvere, og legg manuelt til navn og tider."
@@ -102,6 +102,9 @@ const Lager = () => {
                   </div>
                 ))}
               </div>
+              <VisStarttider item={item} index={index} />
+              <VisResultater item={item} index={index} />
+
               <button
                 onClick={() => startSekundering(item)}
                 className="lager-button"

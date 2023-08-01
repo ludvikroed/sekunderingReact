@@ -52,6 +52,20 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+}
+
+.resultater-starttider-button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-bottom: 5px;
+
 }
 
 /* lager.css */
@@ -64,6 +78,7 @@
 }
 
 .slett-button {
+    font-size: 16px;
     position: absolute;
     top: 5px;
     right: 5px;

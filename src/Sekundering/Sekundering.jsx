@@ -52,6 +52,7 @@ function Sekundering() {
               lagreSekunderingTall + "lagretSekundering",
               JSON.stringify({ løpere: functionData.løpere, dato: currentDate })
             );
+            sessionStorage.setItem("dataKey", lagreSekunderingTall);
           }
         } catch (error) {
           setLøpereData(data[0]["løpere"]);
@@ -68,9 +69,9 @@ function Sekundering() {
             lagreSekunderingTall + "lagretSekundering",
             JSON.stringify({ løpere: data[0]["løpere"], dato: currentDate })
           );
+          sessionStorage.setItem("dataKey", lagreSekunderingTall);
         }
       }
-
       const isSessionStorageEmpty = sessionStorage.length === 0;
       if (isSessionStorageEmpty) {
         setErrorMessage(
@@ -94,9 +95,25 @@ function Sekundering() {
         );
       }
     };
-
     loadData();
   }, [location.state]);
+  useEffect(() => {
+    const domFunksjon = () => {
+      const dataKey = sessionStorage.getItem("dataKey");
+      const oldData = JSON.parse(
+        localStorage.getItem(dataKey + "lagretSekundering")
+      );
+
+      oldData["løpere"] = løpereData;
+      localStorage.setItem(
+        dataKey + "lagretSekundering",
+        JSON.stringify(oldData)
+      );
+    };
+    try {
+      domFunksjon();
+    } catch {}
+  }, [location.state, løpereData]);
 
   const [errorMessage, setErrorMessage] = useState("");
 
